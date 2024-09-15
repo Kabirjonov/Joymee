@@ -1,0 +1,29 @@
+.footerContact{
+    background: var(--logoColor);
+}
+.Footer__text h1{
+    font-size: 40px;
+    font-weight: bold;
+}
+footer{
+    background: var(--blackblue);
+    padding: 50px 0;
+    color: var(--while);
+}
+.footer__btn{
+    background: var(--black);
+    color: var(--logoColor);
+    font-size: 20px;
+    border-radius: 30px;
+    transition: 0.5s;
+    border: 1px solid var(--black) !important;
+}
+.footer__li{
+    padding: 5px 0;
+}
+.footer__h3{
+    font-size: 20px;
+}
+.footer__img{
+    height: 50px;
+}

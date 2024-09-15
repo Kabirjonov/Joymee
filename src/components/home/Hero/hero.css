@@ -1,0 +1,86 @@
+.hero{
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to top, rgba(128, 128, 128, 0.378),rgba(128, 128, 128, 0.378)),url('../../images/room_01.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.hero h1{
+    color: var(--while) !important;
+    font-size: 50px !important;
+}
+.hero p{
+    color: var(--while) !important;
+    opacity: 0.8;
+}
+.hero__title{
+    text-align: center;
+}
+.hero__form-input{
+    outline: none;
+    border-color: gray 0.5px solid !important;
+    padding: 5px;
+    margin-top: 5px;
+}
+.hero__form-input::placeholder{
+    color: var(--black);
+    text-transform: capitalize;
+}
+.hero__form-row{
+    /* background: rgb(255, 255, 255); */
+    margin-top: 3%;
+    background: #fff;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+.hero__form-box{
+    display: grid;
+    align-items: center;
+    position: relative;
+    padding: 10px 20px;
+    border-left: 1px solid rgba(128,128,128,0.2);
+}
+.hero__form-box:nth-child(1){
+    border-left: none;
+}
+.hero__form-div{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.hero__title-h1{
+    text-transform: capitalize;
+    color: var(--while);
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 50px;
+}
+.hero__title-p{
+    color: var(--while);
+
+}
+.hero__form-span{
+    color: #333;
+    font-weight: 500;
+    font-size: 14px;
+}
+/* .for-after-border::before{
+    content: "";
+    width: 1px;
+    height: 80px;
+    position: absolute;
+    background: gray;
+} */
+.hero__form-h5{
+    color: var(--black);
+    font-weight: 600;
+    /* font-size: 20px; */
+    margin: 0;
+}

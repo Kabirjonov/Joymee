@@ -1,0 +1,67 @@
+.span{
+    background: var(--logoColor);
+    width: auto;
+    /* height: 100px; */
+    padding: 0 10px;
+    color: var(--black);
+    font-weight: 400;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.navar__logo-img{
+    max-width: 100%;
+    height: 50px;
+}
+.btn1{
+    display: flex;
+    align-items: center;
+    border: none;
+    color: var(--black);
+    background-color:var(--logoColor);
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.navbar h4{
+    color: var(--black);
+    margin: auto 0;
+    margin-right: 10px;
+}
+.navar__login-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navbar__item-ul{
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.navbar__item-li a{
+    font-weight: 500;
+    transition: 0.5s;
+}
+.navbar__item-li a:hover{
+    color: var(--logoColor);
+}
+nav{
+    padding: 15px 0;
+    position: static;
+    box-shadow: 0 5px 30px rgb(0 22 84 / 10%) !important;
+    height: 10vh;
+    background: var(--while);
+}
+.navbar__item-li{
+    font-size: 20px;
+}
+/* .navbar-toggler[aria-expanded="true"].navbar-collapse  {
+    background: red;
+} */
+
+/*  bu yerda navbar-toggle ni yani telefon versasida ochildaigan icon ni togilash kerak */
+.dropdown-menu .show{
+    min-width: 0 !important;
+}

@@ -1,0 +1,39 @@
+.awards__background {
+    background: var(--blackblue);
+}
+
+.awards__background .heading {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.awards__background .heading h1 {
+    color: var(--while);
+    font-size: 30px;
+    font-weight: 400;
+}
+.awards__background .heading p {
+    color: var(--logoColor);
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+.awards__icon  {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 4% 50%;
+    font-size: 40px;
+    color: var(--while);
+    background: rgba(255, 255, 255, 0.1);
+}
+.awards h1{
+    color: #fff;
+    font-weight: bold;
+    font-family: sans-serif;
+    margin-top: 5px;
+}
+.awards p{
+    color: var(--p);
+}
