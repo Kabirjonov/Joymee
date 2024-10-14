@@ -1,8 +1,7 @@
 .footerContact{
     background: var(--logoColor);
 }
-.Footer__text h1{
-    font-size: 40px;
+.Footer__text h2{
     font-weight: bold;
 }
 footer{
@@ -26,4 +25,20 @@ footer{
 }
 .footer__img{
     height: 50px;
+}
+@media screen and (max-width:992px) {
+    .none-media{
+        opacity: 0;
+        display: none;
+    }
+    .footer__btn {
+        font-size: 15px;
+
+    }
+    .Footer__text h2{
+        font-size: 25px;
+    }
+    .Footer__text p{
+        font-size: 15px;
+    }
 }

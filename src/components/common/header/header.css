@@ -65,3 +65,18 @@ nav{
 .dropdown-menu .show{
     min-width: 0 !important;
 }
+.heading {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+@media (max-width: 769px) {
+    .heading {
+        width: 100% !important;
+    }
+    .navar__logo-img{
+        height: 35px;        
+    }
+}
+

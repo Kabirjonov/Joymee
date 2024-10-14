@@ -8,7 +8,7 @@ const Footer = () => {
                 <div className="container">
                     <div className="d-flex justify-content-between">
                         <div className="Footer__text">
-                            <h1>Do You Have Questions?</h1>
+                            <h2>Do You Have Questions?</h2>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                         </div>
                         <div className='d-flex align-items-center'>
@@ -20,7 +20,7 @@ const Footer = () => {
             <footer>
                 <div className="container">
                     <div className="row">
-                        <div className="col">
+                        <div className="col Footer__text-left">
                             <img src={require('../../images/logo.png')} className='footer__img' alt="" />
                             <h3 className='mt-2 mb-3'>Do You Need Help With Anything?</h3>
                             <p className='p'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto dolores corrupti earum voluptatum perspiciatis accusamus?</p>
@@ -29,10 +29,10 @@ const Footer = () => {
                                 <button placeholder='Email Address' className="btn btn-warning text-dark">Submit</button>
                             </div>
                         </div>
-                        <div className="col">
+                        <div className="col none-media">
                             <div className="row">
                                 {footer.map((val) => (
-                                    <div className='col'>
+                                    <div className='col text-center'>
                                         <h3 className='footer__h3'>{val.title}</h3>
                                         <ul>
                                             {val.text.map((item)=>(

@@ -14,8 +14,7 @@ export default function RecentCard() {
           const { cover, category, location, name, price, type } = val
           return (
             <div className='col-sm-6 col-lg-4 mb-2'>
-               <Card
-              className='shadow-lg border-0 p-2 mb-2 ronded '
+               <Card className='shadow-lg border-0 p-2 mb-2 ronded '
             >
               <img
                 alt="Sample"
@@ -29,6 +28,8 @@ export default function RecentCard() {
                     style={{
                       background: category == SU ? "var(--p)" : "rgba(255, 152, 0, 0.1)",
                       color: category == SU ? "var(--while)" : "rgb(255, 152, 0)", fontWeight: 600
+                      // bu yerda SU ning ornigaa realni projectda tilga qarab ozgartirish kerak
+                      // bu hamm inglis ham rus ham o`zbek tilida bolganda hatto bo`lmasligi uchun SU ogarivchiga tenglab qoydim
                     }}
                   >
                     {val.category}

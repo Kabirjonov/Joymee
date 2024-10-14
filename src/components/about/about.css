@@ -1,0 +1,27 @@
+.about{
+}
+.about .heading{
+    text-align: left;
+    width: 100% !important;
+}
+.about p{
+    font-size: 20px;
+    padding-right: 30px;
+    line-height: 25px;
+}
+@media screen and (max-width:768px) {
+    .about .container{
+        flex-direction: column;
+    }
+    .about p{
+        padding: 0;
+    }
+    .about .container img{
+        margin-top: 10px;
+        /* margin-bottom: 50px ; */
+    }
+    .about .row{
+        margin: 20px 0;
+    }
+
+}
