@@ -1,3 +1,9 @@
+/* Default (Light mode) */
+body {
+  background-color: #fff;
+  color: black;
+}
+
 :root{
   --logoColor:#fedf2c;
   --while:#fff;

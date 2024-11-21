@@ -1,0 +1,10 @@
+.login_page{
+    height: 100vh;
+    display: flex;
+    background-image:  linear-gradient(rgba(57, 57, 57, 0.729),rgba(57, 57, 57, 0.729)),
+    url('../images/house\ \(1\).jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+}

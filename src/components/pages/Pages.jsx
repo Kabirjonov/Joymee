@@ -1,31 +1,27 @@
-import React from 'react'
-import Header from '../common/header/Header'
-import {BrowserRouter as Router,Switch,Route} from "react-router-dom"
-import Home from '../home/Home'
-import About from '../about/About'
-import Services from '../service/Service'
-import Blog from '../blog/Blog'
-import Contact from '../contact/Contact'
+import React from 'react';
+import Header from '../common/header/Header';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Updated import for Routes and Route
+import Home from '../home/Home';
+import About from '../about/About';
+import Services from '../service/Service';
+import Blog from '../blog/Blog';
+import Contact from '../contact/Contact';
+import LogIn from '../register/LogIn';
+import LogUp from '../register/LogUp';
+
 export default function Pages() {
     return (
         <Router>
             <Header />
-            <Switch>
-                <Route exact path='/'component={Home}/>
-            </Switch>
-            <Switch>
-                <Route exact path='/about'component={About}/>
-            </Switch>
-            <Switch>
-                <Route exact path='/services'component={Services}/>
-            </Switch>
-            <Switch>
-                <Route exact path='/blog'component={Blog}/>
-            </Switch>
-            <Switch>
-                <Route exact path='/contact'component={Contact}/>
-            </Switch>
+            <Routes> {/* Use Routes instead of Switch */}
+                <Route path="/" element={<Home />} /> {/* Use element with JSX */}
+                <Route path="/about" element={<About />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/signin" element={<LogIn />} />
+                <Route path="/signup" element={<LogUp />} />
+            </Routes>
         </Router>
-
-    )
+    );
 }
