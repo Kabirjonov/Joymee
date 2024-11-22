@@ -1,6 +1,7 @@
 .login_page{
     height: 100vh;
     display: flex;
+    width: 100%;
     background-image:  linear-gradient(rgba(57, 57, 57, 0.729),rgba(57, 57, 57, 0.729)),
     url('../images/house\ \(1\).jpg');
     background-size: cover;

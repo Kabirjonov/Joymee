@@ -8,7 +8,8 @@ import Blog from '../blog/Blog';
 import Contact from '../contact/Contact';
 import LogIn from '../register/LogIn';
 import LogUp from '../register/LogUp';
-
+import Dashboard from '../dashboard/DashboardPage';
+import Error from '../ErrorPage/Error';
 export default function Pages() {
     return (
         <Router>
@@ -21,6 +22,8 @@ export default function Pages() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/signin" element={<LogIn />} />
                 <Route path="/signup" element={<LogUp />} />
+                <Route path="/dashboard" element={<Dashboard/>} />
+                <Route path="*" element={<Error/>}/>
             </Routes>
         </Router>
     );

@@ -6,19 +6,11 @@ import './header.css';
 import logo from '../../images/logo.png';
 
 export default function Header() {
-  // Theme state
-  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
-
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
-
-  const toggleTheme = (newTheme) => {
-    setTheme(newTheme);
-  };
-
-  return (
+  const [toggleTheme,setToggleTheme]= useState('light')
+  useEffect(()=>{
+    
+  },[toggleTheme])
+  return (  
     <header className='position-fixed w-100 ' id='navbar' style={{ zIndex: '1' }}>
       <nav className="navbar navbar-expand-lg ">
         <div className="container d-flex align-items-center">
@@ -38,19 +30,19 @@ export default function Header() {
                 </li>
               ))}
             </ul>
-            <div className="navbar__login-page">
+            <div className="navbar__login-page d-flex align-items-center">
               <Link to={'/signin'} className='btn1' aria-label="Sign In">
                 <i className="bi bi-box-arrow-right"></i> Sign In
               </Link>
-              <Dropdown className="navbar__mode">
+              <Dropdown className="navbar__mode mx-2">
                 <Dropdown.Toggle variant="" id="dropdown-basic" aria-label="Toggle theme">
-                  <i className={theme === "light" ? "bi bi-brightness-high-fill" : "bi bi-moon-stars-fill"}></i>
+                  <i className={toggleTheme === "light" ? "bi bi-brightness-high-fill" : "bi bi-moon-stars-fill"}></i>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item onClick={() => toggleTheme("light")}>
+                  <Dropdown.Item onClick={() => setToggleTheme("light")}>
                     <i className="bi bi-brightness-high-fill"></i> Light Mode
                   </Dropdown.Item>
-                  <Dropdown.Item onClick={() => toggleTheme("dark")}>
+                  <Dropdown.Item onClick={() => setToggleTheme("dark")}>
                     <i className="bi bi-moon-stars-fill"></i> Dark Mode
                   </Dropdown.Item>
                 </Dropdown.Menu>

@@ -1,5 +1,5 @@
   /* other styles */
-  
+/*   
 :root[data-theme="light"] {
     --background-color: #fff;
     --text-color: #000;
@@ -10,12 +10,12 @@
     --text-color: #fff;
   }
   
-  .navbar {
-    background-color: var(--background-color);
+   */
+
+   .navbar {
+    background-color: var(--bone);
     color: var(--text-color);
   }
-
-  
 .span{
     background: var(--logoColor);
     width: auto;
@@ -74,6 +74,9 @@ nav{
 }
 .navbar__item-li{
     font-size: 20px;
+}
+.navbar__logo-img{
+    height: 50px;
 }
 /* .navbar-toggler[aria-expanded="true"].navbar-collapse  {
     background: red;

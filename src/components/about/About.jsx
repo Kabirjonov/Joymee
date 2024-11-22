@@ -17,7 +17,7 @@ export default function About() {
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident fugiat aliquam vel at aspernatur ipsa unde beatae sapiente architecto accusantium?</p>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident fugiat aliquam vel at aspernatur ipsa unde beatae sapiente architecto accusantium?</p>
             <div>
-            <button className='Button_02'>More About Me</button>
+            <button className='Button_02'>More About Us</button>
 
             </div>
             </div>
