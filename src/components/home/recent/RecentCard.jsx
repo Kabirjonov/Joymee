@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { CardBody, CardTitle, CardText, CardSubtitle, ListGroup } from 'reactstrap'
+import { CardBody, CardTitle, CardText, CardSubtitle, ListGroup ,UncontrolledCarousel } from 'reactstrap'
 import { list } from '../../data/Data'
 export default function RecentCard() {
   var SU = "For Sale"
@@ -16,11 +16,30 @@ export default function RecentCard() {
             <div className='col-sm-6 col-lg-4 mb-2'>
                <Card className='shadow-lg border-0 p-2 mb-2 ronded '
             >
-              <img
+              <UncontrolledCarousel
+  items={[
+    {
+      altText: 'Slide 1',
+      key: 1,
+      src: 'https://picsum.photos/id/123/1200/600'
+    },
+    {
+      altText: 'Slide 2',
+      key: 2,
+      src: 'https://picsum.photos/id/456/1200/600'
+    },
+    {
+      altText: 'Slide 3',
+      key: 3,
+      src: 'https://picsum.photos/id/678/1200/600'
+    }
+  ]}
+ />
+              {/* <img
                 alt="Sample"
                 src="https://picsum.photos/300/200"
                 className='recent__img'
-              />
+              /> */}
               <CardBody>
                 <div className="m-2 d-flex justify-content-between align-items-center">
                   <CardSubtitle

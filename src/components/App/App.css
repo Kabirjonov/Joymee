@@ -1,19 +1,9 @@
 /* Default (Light mode) */
-body {
+/* body {
   background-color: #fff;
   color: black;
-}
+} */
 :root[data-theme="light"] {
-  --logoColor:#fedf2c;
-  --while:#000;
-  --black:#fff;
-  --truth:#2f3954;
-  --p:#72809d;
-  --blackblue:#122947;
-  --bone:#f7f9fc;
-}
-
-:root[data-theme="dark"] {
   --logoColor:#fedf2c;
   --while:#fff;
   --black:#000000;
@@ -23,6 +13,21 @@ body {
   --bone:#f7f9fc;
 }
 
+:root[data-theme="dark"] {
+  --logoColor: #fedf2c;
+  --while: #000;
+  --black: #fff;
+  --truth: #2f3954;
+  --p: #72809d;
+  --blackblue: #122947;
+  --bone: #f7f9fc;
+}
+
+body {
+  background-color: var(--while);
+  color: var(--black);
+  transition: background-color 0.3s, color 0.3s;
+}
 :root{
   --logoColor:#fedf2c;
   --while:#fff;

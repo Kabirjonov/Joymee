@@ -6,10 +6,17 @@ import './header.css';
 import logo from '../../images/logo.png';
 
 export default function Header() {
-  const [toggleTheme,setToggleTheme]= useState('light')
-  useEffect(()=>{
-    
-  },[toggleTheme])
+  const [toggleTheme, setToggleTheme] = useState(() => localStorage.getItem('theme') || 'light');
+  const [login,setLogin]=useState(true)
+  useEffect(() => {
+    let theme = localStorage.setItem('theme', toggleTheme);
+    document.documentElement.setAttribute('data-theme', toggleTheme);
+    if (toggleTheme === 'dark') {
+      console.log("Qorong'u mavzu tanlangan");
+    } else {
+      console.log("Yorug' mavzu tanlangan yoki hech qanday mavzu tanlanmagan");
+    }
+  }, [toggleTheme]);
   return (  
     <header className='position-fixed w-100 ' id='navbar' style={{ zIndex: '1' }}>
       <nav className="navbar navbar-expand-lg ">
@@ -31,9 +38,16 @@ export default function Header() {
               ))}
             </ul>
             <div className="navbar__login-page d-flex align-items-center">
-              <Link to={'/signin'} className='btn1' aria-label="Sign In">
-                <i className="bi bi-box-arrow-right"></i> Sign In
-              </Link>
+              {/* bu yerda signin har doim turish kerakmas qachon mijoz royxatdan otganda unga sign orniga profile tugmasi korinish kerak */}
+             {login===false?(
+ <Link to={'/signin'} className='btn1' aria-label="Sign In">
+ <i className="bi bi-box-arrow-right"></i> Sign In
+</Link>
+             ):(
+              <Link to={'/profile'}><div style={{height:'50px',width:'50px'}}><img src='https://picsum.photos/id/456/1200/600' className='border rounded-circle w-100 h-100'/></div></Link>
+             )}
+             
+              {/*  */}
               <Dropdown className="navbar__mode mx-2">
                 <Dropdown.Toggle variant="" id="dropdown-basic" aria-label="Toggle theme">
                   <i className={toggleTheme === "light" ? "bi bi-brightness-high-fill" : "bi bi-moon-stars-fill"}></i>

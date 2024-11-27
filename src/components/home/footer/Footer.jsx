@@ -1,6 +1,7 @@
 import React from 'react'
 import { footer } from '../../data/Data'
 import './footer.css'
+import { Link } from 'react-router-dom'
 const Footer = () => {
     return (
         <>
@@ -12,7 +13,7 @@ const Footer = () => {
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                         </div>
                         <div className='d-flex align-items-center'>
-                        <button className="btn footer__btn p-3">Contact Us Today</button>
+                        <Link to='/contact' className="btn footer__btn p-3">Contact Us Today</Link>
                         </div>
                     </div>
                 </div>

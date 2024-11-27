@@ -9,6 +9,7 @@ import Contact from '../contact/Contact';
 import LogIn from '../register/LogIn';
 import LogUp from '../register/LogUp';
 import Dashboard from '../dashboard/DashboardPage';
+import Profile from '../register/Profile'
 import Error from '../ErrorPage/Error';
 export default function Pages() {
     return (
@@ -23,6 +24,7 @@ export default function Pages() {
                 <Route path="/signin" element={<LogIn />} />
                 <Route path="/signup" element={<LogUp />} />
                 <Route path="/dashboard" element={<Dashboard/>} />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="*" element={<Error/>}/>
             </Routes>
         </Router>

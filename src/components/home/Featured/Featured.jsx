@@ -7,7 +7,7 @@ export default function Featured() {
     <>
       <section className="padding background">
         <div className="container">
-          <Heading title="Featured Property Types" subtitle="Lorem ipsum dolor sit amet laudantium optio quae repudiandae accusamus."/>
+          <Heading title="Featured Property Types"SpecialClass="w-100 text-center" size="w-75 m-auto" subtitle="Lorem ipsum dolor sit amet laudantium optio quae repudiandae accusamus."/>
           <FeaturedCard/>
         </div>
       </section>
