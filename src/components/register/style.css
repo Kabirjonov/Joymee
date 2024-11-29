@@ -7,5 +7,22 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+}
 
+.icon_forPerson{
+    font-size: 8rem;
+    position: relative;
+}
+.h100{
+    box-sizing: border-box;
+    height: 100vh;
+}
+.icon_forPerson::before{
+    content: 'Hello';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 50%;
+    width: 100%;
+    background: red;
 }

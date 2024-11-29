@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './style.css';
-import {useNavigate } from 'react-router-dom'
 import { FormGroup, Form, Label, Input, Button } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 import axios from 'axios';  // Axios kutubxonasini import qilish
 import { toast, ToastContainer } from 'react-toastify';
 
@@ -19,12 +18,25 @@ const LogIn = () => {
                     'Content-Type': 'application/json',
                 },
             });
-    
             if (response.status === 200) {
-                navigate('/dashboard');
-            } else {
-                toast.error(response.data.message || 'User creation failed! Please try again.');
+                const token = response.headers['x-auth-token']; // Tokenni headerdan olish
+                if (token) {
+                    localStorage.setItem('token', token); // Tokenni saqlash
+                    toast.success('Registration successful! Redirecting...');
+                    setTimeout(() => {
+                        navigate('/dashboard'); // Dashboard sahifasiga o'tish
+                    window.location.reload(); 
+
+                    }, 2000); // Toast xabaridan keyin vaqt berish
+                } else {
+                    toast.error('User creation failed! Please try again.');
+                }
             }
+            // if (response.status === 200) {
+            //     navigate('/dashboard');
+            // } else {
+            //     toast.error(response.data.message || 'User creation failed! Please try again.');
+            // }
         } catch (error) {
             console.error('Error connecting to the server:', error);
             if (error.response) {
@@ -39,7 +51,7 @@ const LogIn = () => {
 
     return (
         <>
-            <div className="row login_page">
+            <div className="row login_page h100 w-100">
             <ToastContainer />
                 <div className="col-xl-4 col-lg-6 col-sm-6 align-self-center">
                     <div className="shadow p-3 mx-5 bg-dark rounded text-light">
