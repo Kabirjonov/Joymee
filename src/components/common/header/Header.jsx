@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect,useContext } from 'react';
+import { Link,useNavigate  } from 'react-router-dom';
 import { nav } from "../../data/Data";
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Form, FormGroup, Label, Input } from 'reactstrap'
 import './header.css';
 import logo from '../../images/logo.png';
-
+import {TokenContext} from '../../register/TokenProvider/TokenContext'
+import Cookies from 'js-cookie'
 export default function Header() {
-  const [login, setLogin] = useState(() => !!localStorage.getItem('token'));
-  const token = localStorage.getItem('token');
+  // const { setToken,token } = useContext(TokenContext);
+  const token = Cookies.get('token')
+  const navigate = useNavigate();
+
+  // const [login, setLogin] = useState(() => !!localStorage.getItem('token'));
+  // const token = localStorage.getItem('token'); 
 
   const [toggleTheme, setToggleTheme] = useState(() => localStorage.getItem('theme') || 'light');
   // useEffect(() => {
@@ -20,10 +25,16 @@ export default function Header() {
   //     console.log("Yorug' mavzu tanlangan yoki hech qanday mavzu tanlanmagan");
   //   }
   // }, [toggleTheme]);
-  useEffect(() => {
-    setLogin(!!token);
-    // alert(login)
-  }, [setLogin])
+  // useEffect(() => {
+  //   setLogin(!!token);
+  //   // alert(login)
+  // }, [setLogin])
+  function handleLogout(){
+    // setToken(null)
+    Cookies.remove('token')
+    navigate('/signin', { replace: true });
+
+  } 
   return (
     <header className='position-fixed w-100 ' id='navbar' style={{ zIndex: '1' }}>
       <nav className="navbar navbar-expand-lg ">
@@ -64,7 +75,7 @@ export default function Header() {
                 </Dropdown.Menu>
               </Dropdown>
               {/* bu yerda signin har doim turish kerakmas qachon mijoz royxatdan otganda unga sign orniga profile tugmasi korinish kerak */}
-              {login ? (
+              {token ? (
                 <>
                   <Dropdown className="navbar__profile-dropdown">
                     <Dropdown.Toggle variant="link" id="profile-dropdown" aria-label="Profile">
@@ -81,11 +92,7 @@ export default function Header() {
                       </Dropdown.Item>
                       <Dropdown.Item>
                         <button
-                          onClick={() => {
-                            // Logout logikasini qo'shing
-                            localStorage.removeItem('token');
-                            setLogin(false);
-                          }}
+                          onClick={()=>handleLogout()}
                           className="btn btn-link p-0 text-start"
                         >
                           Lay Out

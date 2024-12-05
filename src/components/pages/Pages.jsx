@@ -6,11 +6,11 @@ import About from '../about/About';
 import Services from '../service/Service';
 import Blog from '../blog/Blog';
 import Contact from '../contact/Contact';
-import LogIn from '../register/LogIn';
-import LogUp from '../register/LogUp';
+import LogIn from '../register/LogIn/LogIn';
+import LogUp from '../register/LogUp/LogUp';
 import ProtectedRoute from '../dashboard/ProtectedRoute'
 import Dashboard from '../dashboard/DashboardPage';
-import Profile from '../register/Profile'
+import Profile from '../register/Profile/Profile'
 import Error from '../ErrorPage/Error';
 export default function Pages() {
     return (
@@ -25,8 +25,8 @@ export default function Pages() {
                 <Route path="/signin" element={<LogIn />} />
                 <Route path="/signup" element={<LogUp />} />
                 <Route path="/dashboard" element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="*" element={<Error/>}/>
+                <Route path="/profile" element={<ProtectedRoute><Profile/></ProtectedRoute>} />
+                <Route path="*" element={<Error />} />
             </Routes>
         </Router>
     );

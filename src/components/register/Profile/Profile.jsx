@@ -1,14 +1,31 @@
-import React, { useState } from 'react';
-import img from '../images/room.jpg';
-import Back from '../back/Back';
-import Footer from '../home/footer/Footer';
+import React, { useState,useContext } from 'react';
+import img from '../../images/room.jpg';
+import Back from '../../back/Back';
+import Footer from '../../home/footer/Footer';
 import { Row, Col } from 'reactstrap';
 import axios from 'axios'
 import './profile.css'
 import { toast, ToastContainer } from 'react-toastify';
 import { IoPersonSharp } from "react-icons/io5";
+import {TokenContext} from '../TokenProvider/TokenContext'
+import Cookies from 'js-cookie'
 
 export default function Profile() {
+  // const { token } = useContext(TokenContext);
+
+  const getJwtPayload = (token) => {
+    if (!token) return null;
+    
+    const base64Url = token.split('.')[1]; // Tokenni "." bilan bo'lish va payloadni olish
+    const base64 = base64Url.replace('-', '+').replace('_', '/'); // Base64 URL-safe formatini to'g'rilash
+    const decoded = JSON.parse(atob(base64)); // Base64-ni dekodlash va JSON-ga aylantirish
+    return decoded;
+};
+const token = Cookies.get('token')
+const payload = getJwtPayload(token)
+console.log(payload)
+
+
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -55,7 +72,7 @@ export default function Profile() {
                         type="text"
                         className="form-control"
                         value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
+                        onCh  ange={(e) => setFirstName(e.target.value)}
                         disabled={!editing}
                       />
                     </div>
