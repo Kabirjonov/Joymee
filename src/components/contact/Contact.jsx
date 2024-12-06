@@ -9,8 +9,8 @@ import { toast, ToastContainer } from 'react-toastify';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    name: '',
-    lastname: '',
+    firstName: '',
+    lastName: '',
     email: '',
     message: '',
   });

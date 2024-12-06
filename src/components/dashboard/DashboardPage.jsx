@@ -18,24 +18,24 @@ const Dashboard = () => {
   const [userLocation, setUserLocation] = useState(null); // Default to Toshkent [41.311081, 69.240562]
   // bu yerda xar doim toshkent ni locationi turish kerak emas, mijozning joylashiviga qarab ozgarish kerak.
 
-  const handleFindMe = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          const newCoors = [latitude, longitude]
-          setUserLocation([latitude, longitude]);
-          setFormData({ ...formData, coordinates: newCoors });
-        },
-        (error) => {
-          console.error('Geolocation error:', error);
-        }
-      );
-    } else {
-      console.error("Geolocation is not supported by this browser.");
-      alert("Joylashuvni olishning imkoni bo'lmadi.");
-    }
-  };
+  // const handleFindMe = () => {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         const { latitude, longitude } = position.coords;
+  //         const newCoors = [latitude, longitude]
+  //         setUserLocation([latitude, longitude]);
+  //         setFormData({ ...formData, coordinates: newCoors });
+  //       },
+  //       (error) => {
+  //         console.error('Geolocation error:', error);
+  //       }
+  //     );
+  //   } else {
+  //     console.error("Geolocation is not supported by this browser.");
+  //     alert("Joylashuvni olishning imkoni bo'lmadi.");
+  //   }
+  // };
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "image") {
@@ -44,12 +44,10 @@ const Dashboard = () => {
       setFormData({ ...formData, [name]: value });
     }
   };
-  const handleMapClick = (e) => {
-    const coords = e.get("coords");
-    setFormData({ ...formData, coordinates: coords });
-  };
-
-
+  // const handleMapClick = (e) => {
+  //   const coords = e.get("coords");
+  //   setFormData({ ...formData, coordinates: coords });
+  // };
   // Handle form submit
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -75,7 +73,7 @@ const Dashboard = () => {
                 Yangi e'lon qo'shish
               </h1>
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} > 
                   <div className="mb-3">
                     <label htmlFor="image" className="form-label">
                       Uy rasmi:
@@ -85,10 +83,9 @@ const Dashboard = () => {
                       id="image"
                       name="image"
                       className="form-control"
-                      onChange={handleInputChange}
+                      // onChange={handleInputChange}
                     />
                   </div>
-
                   <div className="mb-3">
                     <label htmlFor="price" className="form-label">
                       Narx (USD):
@@ -99,7 +96,7 @@ const Dashboard = () => {
                       name="price"
                       className="form-control"
                       value={formData.price}
-                      onChange={handleInputChange}
+                      // onChange={handleInputChange}
                     />
                   </div>
 
@@ -113,7 +110,7 @@ const Dashboard = () => {
                       name="address"
                       className="form-control"
                       value={formData.address}
-                      onChange={handleInputChange}
+                      // onChange={handleInputChange}
                     />
                   </div>
                   <div className="row mb-3 ">
@@ -123,7 +120,7 @@ const Dashboard = () => {
                         name="type"
                         className="form-select"
                         value={formData.type}
-                        onChange={handleInputChange}
+                        // onChange={handleInputChange}
                       >
                         <option value="sale">Sotuv</option>
                         <option value="rent">Arenda</option>
@@ -140,7 +137,7 @@ const Dashboard = () => {
                       name="area"
                       className="form-control"
                       value={formData.area}
-                      onChange={handleInputChange}
+                      // onChange={handleInputChange}
                     />
                     </div>
                   </div>
@@ -157,13 +154,13 @@ const Dashboard = () => {
                         }}
                         width="100%"
                         height="300px"
-                        onClick={handleMapClick}
+                        // onClick={handleMapClick}
                       >
                         {/* User-selected marker */}
                         <Placemark geometry={formData.coordinates} />
-                        <GeolocationControl onClick={() => handleFindMe()} options={{
-                          float: "right", // Position of the button on the map
-                        }} />
+                          {/* <GeolocationControl onClick={() => handleFindMe()} options={{
+                            float: "right", // Position of the button on the map
+                          }} /> */}
                         {userLocation && <Placemark geometry={userLocation} />}
                       </Map>
                     </YMaps>

@@ -4,14 +4,11 @@ import { FormGroup, Form, Label, Input, Button } from 'reactstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';  // Axios kutubxonasini import qilish
 import { toast, ToastContainer } from 'react-toastify';
-import { TokenContext } from '../TokenProvider/TokenContext'
 import Cookies from 'js-cookie'
 const LogIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-    // const { setToken } = useContext(TokenContext);
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -23,13 +20,10 @@ const LogIn = () => {
             if (response.status === 200) {
                 const token = response.headers['x-auth-token']; // Tokenni headerdan olish
                 if (token) {
-                    // localStorage.setItem('token', token); // Tokenni saqlash
-                    // setToken(token)
                     toast.success('Registration successful! Redirecting...');
                     Cookies.set('token', token, { expires: 7 })
                     setTimeout(() => {
-                        navigate('/dashboard'); // Dashboard sahifasiga o'tish
-                        // window.location.reload();
+                        navigate('/profile'); // Dashboard sahifasiga o'tish
                     }, 2000); // Toast xabaridan keyin vaqt berish
                 } else {
                     toast.error('User creation failed! Please try again.');
@@ -55,7 +49,7 @@ const LogIn = () => {
     return (
         <>
             <div className="row login_page h100 w-100">
-                <ToastContainer />
+                {/* <ToastContainer /> */}
                 <div className="col-xl-4 col-lg-6 col-sm-6 align-self-center">
                     <div className="shadow p-3 mx-5 bg-dark rounded text-light">
                         <h3 className="text-center card__title text-warning pb-3">Sign In</h3>

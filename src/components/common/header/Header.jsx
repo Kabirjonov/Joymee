@@ -1,47 +1,36 @@
-import React, { useState, useEffect,useContext } from 'react';
-import { Link,useNavigate  } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { nav } from "../../data/Data";
 import Dropdown from 'react-bootstrap/Dropdown';
-import { Form, FormGroup, Label, Input } from 'reactstrap'
 import './header.css';
 import logo from '../../images/logo.png';
-import {TokenContext} from '../../register/TokenProvider/TokenContext'
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
+import img from '../../images/room.jpg'
+
 export default function Header() {
-  // const { setToken,token } = useContext(TokenContext);
   const token = Cookies.get('token')
   const navigate = useNavigate();
-
-  // const [login, setLogin] = useState(() => !!localStorage.getItem('token'));
-  // const token = localStorage.getItem('token'); 
-
   const [toggleTheme, setToggleTheme] = useState(() => localStorage.getItem('theme') || 'light');
-  // useEffect(() => {
-  //   let theme = localStorage.setItem('theme', toggleTheme);
-  //   document.documentElement.setAttribute('data-theme', toggleTheme);
-  //   if (toggleTheme === 'dark') {
-  //     console.log("Qorong'u mavzu tanlangan");
-  //   } else {
-  //     console.log("Yorug' mavzu tanlangan yoki hech qanday mavzu tanlanmagan");
-  //   }
-  // }, [toggleTheme]);
-  // useEffect(() => {
-  //   setLogin(!!token);
-  //   // alert(login)
-  // }, [setLogin])
-  function handleLogout(){
-    // setToken(null)
-    Cookies.remove('token')
-    navigate('/signin', { replace: true });
 
-  } 
+  // Tema o'zgarishlarini saqlash va dasturga qo'llash
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', toggleTheme);
+    localStorage.setItem('theme', toggleTheme);
+  }, [toggleTheme]);
+
+  // Logout funksiyasi
+  function handleLogout() {
+    Cookies.remove('token');  // Tokenni o'chirish
+    navigate('/signin', { replace: true });  // Sign In sahifasiga yo'naltirish
+  }
+
   return (
-    <header className='position-fixed w-100 ' id='navbar' style={{ zIndex: '1' }}>
-      <nav className="navbar navbar-expand-lg ">
+    <header className="position-fixed w-100" id="navbar" style={{ zIndex: '1' }}>
+      <nav className="navbar navbar-expand-lg">
         <div className="container d-flex align-items-center">
           <Link className="navbar-brand" to="/" aria-label="Home">
             <div className="logo">
-              <img className='navbar__logo-img' src={logo} alt="Logo" />
+              <img className="navbar__logo-img" src={logo} alt="Logo" />
             </div>
           </Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,8 +44,8 @@ export default function Header() {
                 </li>
               ))}
               {token && (
-                <li className="nav-item navbar__item-li" >
-                  <Link to='dashboard'>dashboard</Link>
+                <li className="nav-item navbar__item-li">
+                  <Link to="dashboard">Dashboard</Link>
                 </li>
               )}
             </ul>
@@ -74,43 +63,32 @@ export default function Header() {
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-              {/* bu yerda signin har doim turish kerakmas qachon mijoz royxatdan otganda unga sign orniga profile tugmasi korinish kerak */}
-              {token ? (
-                <>
-                  <Dropdown className="navbar__profile-dropdown">
-                    <Dropdown.Toggle variant="link" id="profile-dropdown" aria-label="Profile">
-                      <img
-                        src="https://picsum.photos/id/456/1200/600"
-                        alt="Profile"
-                        className="border rounded-circle"
-                        style={{ height: '50px', width: '50px', objectFit: 'cover' }}
-                      />
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item as={Link} to="/profile">
-                        Profile
-                      </Dropdown.Item>
-                      <Dropdown.Item>
-                        <button
-                          onClick={()=>handleLogout()}
-                          className="btn btn-link p-0 text-start"
-                        >
-                          Lay Out
-                        </button>
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                  {/* <Link to={'/profile'}><div style={{ height: '50px', width: '50px' }}><img src='https://picsum.photos/id/456/1200/600' className='border rounded-circle w-100 h-100' /></div></Link> */}
-                </>
 
+              {/* Agar foydalanuvchi tizimga kirgan bo'lsa, Profile ko'rsatiladi */}
+              {token ? (
+                <Dropdown className="navbar__profile-dropdown">
+                  <Dropdown.Toggle variant="link" id="profile-dropdown" aria-label="Profile">
+                    <img
+                      // src="https://picsum.photos/id/456/1200/600"
+                      src={img}
+                      alt="Profile"
+                      className="border rounded-circle"
+                      style={{ height: '50px', width: '50px', objectFit: 'cover' }}
+                    />
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item as={Link} to="/profile">Profile</Dropdown.Item>
+                    <Dropdown.Item>
+                      <button onClick={handleLogout} className="btn btn-link p-0 text-start">Logout</button>
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
               ) : (
-                <Link to={'/signin'} className='btn1' aria-label="Sign In">
+                // Agar foydalanuvchi tizimga kirgan bo'lmasa, Sign In ko'rsatiladi
+                <Link to="/signin" className="btn1" aria-label="Sign In">
                   <i className="bi bi-box-arrow-right"></i> Sign In
                 </Link>
               )}
-
-              {/*  */}
-
             </div>
           </div>
         </div>

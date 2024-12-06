@@ -3,28 +3,27 @@ import '../style.css';
 import { FormGroup, Form, Label, Input, Button } from 'reactstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import { toast, ToastContainer } from 'react-toastify';
 import {validatePhoneNumber} from '../validators'
-import {TokenContext} from '../TokenProvider/TokenContext'
 import Cookies from 'js-cookie'
 const SignUp = () => {
-    const { setToken } = useContext(TokenContext);
+
     const [user, setUser] = useState({
-        name: '',
-        lastname: '',
+        firstName: '',
+        lastName: '',
         email: '',
-        number: '+9989',
+        phone: '+9989',
         birthday: '',
         password: '',
         gender: '', // Changed from "male"  
     });
+    
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault(); 
         // console.log(user)
-        // if(!validatePhoneNumber(user.number)){
+        // if(!validatePhoneNumber(user.phone)){
         //     toast.error('Invalid phone number format. Please check your input.');
         //     return;
         // }
@@ -32,11 +31,11 @@ const SignUp = () => {
             const response = await axios.post(
                 'http://localhost:3001/api/logup',
                 { 
-                    name: user.name,
-                    lastname: user.lastname,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
                     email: user.email,
                     password: user.password,
-                    number: user.number,
+                    phone: user.phone,
                     birthday: user.birthday,    
                     gender: user.gender,
                 },
@@ -49,33 +48,30 @@ const SignUp = () => {
             if (response.status === 200) {
                 const token = response.headers['x-auth-token'];
                 if (token) {
-                    setToken(token)
-                    // localStorage.setItem('token', token);
                     Cookies.set('token', token, { expires: 7 })
-                    toast.success('Registration successful! Redirecting...');
+                    // toast.success('Registration successful! Redirecting...');
                     setTimeout(() => {
                         navigate('/dashboard');
-                        // window.location.reload();
-                    }, 400);
+                    }, 2000);
                 } else {
-                    toast.error('Token not provided in response headers. Please try again.');
+                    // toast.error('Token not provided in response headers. Please try again.');
                 }
             } else {
-                toast.error(response.data.message || 'User creation failed! Please try again.');
+                // toast.error(response.data.message || 'User creation failed! Please try again.');
             }
         } catch (err) {
             console.error('Error:', err);
             if (err.response) {
-                toast.error(err.response.data.message || 'Something went wrong. Please try again.');
+                // toast.error(err.response.data.message || 'Something went wrong. Please try again.');
             } else {
-                toast.error('Network error. Please check your connection.');
+                // toast.error('Network error. Please check your connection.');
             }
         }
     };
 
     return (
         <div className="row w-100 login_page h100">
-            <ToastContainer />
+            {/* <ToastContainer /> */}
             <div className="col-6 m-auto d-grid align-items-center">
                 <div className="shadow p-3 mx-5 bg-dark rounded text-light">
                     <h3 className="text-center card__title text-warning pb-3">Sign Up</h3>
@@ -83,30 +79,30 @@ const SignUp = () => {
                         <div className="row">
                             <div className="col-6">
                                 <FormGroup>
-                                    <Label for="name" className="mb-2">Name</Label>
+                                    <Label for="firstName" className="mb-2">Name</Label>
                                     <Input
-                                        id="name"
-                                        name="name"
+                                        id="firstName"
+                                        name="firstName"
                                         type="text"
                                         placeholder="Enter your name"
                                         className="p-2"
-                                        value={user.name}
-                                        onChange={(e) => setUser({ ...user, name: e.target.value })}
+                                        value={user.firstName}
+                                        onChange={(e) => setUser({ ...user, firstName: e.target.value })}
                                         required
                                     />
                                 </FormGroup>
                             </div>
                             <div className="col-6">
                                 <FormGroup>
-                                    <Label for="lastname" className="mb-2">Last Name</Label>
+                                    <Label for="lastName" className="mb-2">Last Name</Label>
                                     <Input
-                                        id="lastname"
-                                        name="lastname"
+                                        id="lastName"
+                                        name="lastName"
                                         type="text"
                                         placeholder="Enter your last name"
                                         className="p-2"
-                                        value={user.lastname}
-                                        onChange={(e) => setUser({ ...user, lastname: e.target.value })}
+                                        value={user.lastName}
+                                        onChange={(e) => setUser({ ...user, lastName: e.target.value })}
                                         required            
                                     />
                                 </FormGroup>
@@ -128,15 +124,15 @@ const SignUp = () => {
                             </div>
                             <div className="col-6">
                                 <FormGroup>
-                                    <Label for="number" className="mb-2">Phone Number</Label>
+                                    <Label for="phone" className="mb-2">Phone Number</Label>
                                     <Input
-                                        id="number"
-                                        name="number"
+                                        id="phone"
+                                        name="phone"
                                         type="text"
                                         placeholder="Enter your phone number"
                                         className="p-2"
-                                        value={user.number}
-                                        onChange={(e) => setUser({ ...user, number: e.target.value })}
+                                        value={user.phone}
+                                        onChange={(e) => setUser({ ...user, phone: e.target.value })}
                                         required
                                     />
                                 </FormGroup>
