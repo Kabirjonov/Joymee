@@ -6,6 +6,9 @@ import './header.css';
 import logo from '../../images/logo.png';
 import Cookies from 'js-cookie';
 import img from '../../images/room.jpg'
+import axios from 'axios';
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 export default function Header() {
   const token = Cookies.get('token')
@@ -22,6 +25,36 @@ export default function Header() {
   function handleLogout() {
     Cookies.remove('token');  // Tokenni o'chirish
     navigate('/signin', { replace: true });  // Sign In sahifasiga yo'naltirish
+  }
+  async function DelAccount() {
+    const result = await Swal.fire({
+      title: "Hisobni o‘chirish",
+      text: "Haqiqatan ham hisobingizni o‘chirmoqchimisiz?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Ha, o‘chir!",
+      cancelButtonText: "Yo‘q, bekor qil!",
+      reverseButtons: true,
+    });
+    if(result.isConfirmed){
+      try {
+        await axios.delete('http://localhost:3001/api/profile', {
+          headers: {
+            'x-auth-token': token,
+            'Content-Type': 'application/json',
+          },
+        })
+        Cookies.remove('token');  // Tokenni o'chirish
+        navigate('/signin', { replace: true });  // Sign In sahifasiga yo'naltirish
+        toast.info('Sizning account o`chirildi')
+        Swal.fire("O‘chirildi!", "Hisobingiz muvaffaqiyatli o‘chirildi.", "success");
+      } catch (err) {
+        Swal.fire("Xato!", "Hisobni o‘chirishda xatolik yuz berdi.", "error");
+      }
+    }
+    else{
+      Swal.fire("Bekor qilindi", "Hisobingiz saqlab qolindi.", "info");
+    }
   }
 
   return (
@@ -77,9 +110,12 @@ export default function Header() {
                     />
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                    <Dropdown.Item as={Link} to="/profile">Profile</Dropdown.Item>
+                    <Dropdown.Item as={Link} to="/profile" className='text-primary'>Profile</Dropdown.Item>
                     <Dropdown.Item>
                       <button onClick={handleLogout} className="btn btn-link p-0 text-start">Logout</button>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                      <button onClick={DelAccount} className="btn text-danger  p-0 text-start">Delete Account</button>
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>

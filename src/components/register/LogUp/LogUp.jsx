@@ -3,7 +3,7 @@ import '../style.css';
 import { FormGroup, Form, Label, Input, Button } from 'reactstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-// import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import {validatePhoneNumber} from '../validators'
 import Cookies from 'js-cookie'
 const SignUp = () => {
@@ -49,22 +49,22 @@ const SignUp = () => {
                 const token = response.headers['x-auth-token'];
                 if (token) {
                     Cookies.set('token', token, { expires: 7 })
-                    // toast.success('Registration successful! Redirecting...');
+                    toast.success('Registration successful! Redirecting...');
                     setTimeout(() => {
                         navigate('/dashboard');
                     }, 2000);
                 } else {
-                    // toast.error('Token not provided in response headers. Please try again.');
+                    toast.error('Token not provided in response headers. Please try again.');
                 }
             } else {
-                // toast.error(response.data.message || 'User creation failed! Please try again.');
+                toast.error(response.data.message || 'User creation failed! Please try again.');
             }
         } catch (err) {
             console.error('Error:', err);
             if (err.response) {
-                // toast.error(err.response.data.message || 'Something went wrong. Please try again.');
+                toast.error(err.response.data.message || 'Something went wrong. Please try again.');
             } else {
-                // toast.error('Network error. Please check your connection.');
+                toast.error('Network error. Please check your connection.');
             }
         }
     };
@@ -164,8 +164,8 @@ const SignUp = () => {
                                         required
                                     >
                                         <option value="">Select Gender</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
+                                        <option value="man">Man</option>
+                                        <option value="woman">Woman</option>
                                     </Input>
                                 </FormGroup>
                             </div>

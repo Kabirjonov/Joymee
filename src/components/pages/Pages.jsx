@@ -12,10 +12,13 @@ import ProtectedRoute from '../dashboard/ProtectedRoute'
 import Dashboard from '../dashboard/DashboardPage';
 import Profile from '../register/Profile/Profile'
 import Error from '../ErrorPage/Error';
+import { ToastContainer } from "react-toastify";
+
 export default function Pages() {
     return (
         <Router>
             <Header />
+            <ToastContainer />
             <Routes> {/* Use Routes instead of Switch */}
                 <Route path="/" element={<Home />} /> {/* Use element with JSX */}
                 <Route path="/about" element={<About />} />
