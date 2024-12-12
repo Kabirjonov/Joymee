@@ -57,9 +57,9 @@ export default function Header() {
         toast.info('Sizning account o`chirildi');
         
       }
-    } else {
+    // } else {
       // Swal.fire("Bekor qilindi", "Hisobingiz saqlab qolindi.", "info");
-    }
+    // }
   }
 
   return (
