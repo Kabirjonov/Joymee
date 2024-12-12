@@ -15,14 +15,9 @@ const Teams = () => {
                     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam." 
                 />
 
-{/*                 <Carousel> */}
-{/*                 <Carousel.Item className='d-flex'> */}
-                    // {featured.map((agent, index) => (
-                            <Agent agent={agent} />
-{/*                     ))}
-                    </Carousel.Item>
-
-                </Carousel> */}
+ 
+                            <Agent />
+                  
             </div>
         </section>
     );
