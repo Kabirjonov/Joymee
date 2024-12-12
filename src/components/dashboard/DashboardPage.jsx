@@ -6,7 +6,7 @@ import { YMaps, Map, Placemark, GeolocationControl } from '@pbe/react-yandex-map
 import axios from 'axios'
 import './style.css'
 import Cookies from 'js-cookie'
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
 const Dashboard = () => {
   const token = Cookies.get('token')
   const [userLocation, setUserLocation] = useState(null); // Default to Toshkent [41.311081, 69.240562]
@@ -17,19 +17,17 @@ const Dashboard = () => {
     shaxar: "",// 
     tuman: "",
     type: "sell", // 'sale' yoki 'rent'
-    tur:"house",// hovli yoki dom,bino
+    tur: "house",// hovli yoki dom,bino
     area: "",
     coordinates: [], // Default coordinates
     comment: "",
-    
-    fileName:"",
+    fileName: "",
     fileUrl: "",
   });
 
   const handleChange = (e) => {
     const { files, name, value } = e.target;
-    setHouseData({ ...houseData, [name]: files ? files[0] : value, })
-    console.log(houseData)
+    setHouseData({ ...houseData, [name]: files ? files[0] : value })
   }
   const handleMapClick = (e) => {
     const coords = e.get("coords");
@@ -41,7 +39,7 @@ const Dashboard = () => {
         (position) => {
           const { latitude, longitude } = position.coords;
           setUserLocation([latitude, longitude]);
-          setHouseData({ ...houseData, coordinates: [latitude,longitude] });
+          setHouseData({ ...houseData, coordinates: [latitude, longitude] });
         },
         (error) => {
           console.error('Geolocation error:', error);
@@ -54,37 +52,38 @@ const Dashboard = () => {
   };
 
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  if(houseData.coordinates.length<2){
-    toast.error("Xarita joylashuvini korsatish majburiy.");
-    return ;
-  }
-  const formData = new FormData();
-  Object.entries(houseData).forEach(([key, value]) => {
-    if (key === "coordinates" && Array.isArray(value)) {
-      formData.append(key, JSON.stringify(value));
-    } else {
-      // Boshqa kalitlar uchun qiymatni to'g'ridan-to'g'ri yuboramiz
-      formData.append(key, value);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (houseData.coordinates.length < 2) {
+      toast.error("Xarita joylashuvini korsatish majburiy.");
+      return;
     }
-  });
-
-  try {
-    const response = await axios.post("http://localhost:3001/api/dashboard", formData,{
-      headers: {
-        'x-auth-token': token,  // Fayl bilan yuborilgani uchun Content-Type ni o‘chirib tashlang
-      },
+    const formData = new FormData();
+    Object.entries(houseData).forEach(([key, value]) => {
+      if (key === "coordinates" && Array.isArray(value)) {
+        formData.append(key, JSON.stringify(value));
+      } else {
+        // Boshqa kalitlar uchun qiymatni to'g'ridan-to'g'ri yuboramiz
+        formData.append(key, value);
+      }
     });
-    console.log("Yuborildi!", response);
-    console.log("HouseData!", houseData);
-    toast.success("E'lon muvaffaqiyatli qo‘shildi!");
-    // setHouseData(); // Tozalash  
-  } catch (error) {
-    console.error("Xatolik yuz berdi:", error);
-    toast.error("Xatolik yuz berdi.");
-  }
-};
+
+    try {
+      const response = await axios.post("http://localhost:3001/api/dashboard", formData, {
+        headers: {
+          'x-auth-token': token,  // Fayl bilan yuborilgani uchun Content-Type ni o‘chirib tashlang
+        },
+      });
+      // console.log("Yuborildi!", response);
+      // console.log("HouseData!", houseData);
+      toast.success("E'lon muvaffaqiyatli qo‘shildi!");
+      setHouseData({})
+      // setHouseData(); // Tozalash  
+    } catch (error) {
+      console.error("Xatolik yuz berdi:", error);
+      toast.error("Xatolik yuz berdi.");
+    }
+  };
 
 
   return (
@@ -101,11 +100,8 @@ const handleSubmit = async (e) => {
               </h1>
 
               <form onSubmit={handleSubmit} >
-
-
-
                 <div className="row">
-                  <div className="col-6 mb-3">
+                  <div className="col-lg-6 mb-3">
                     <label htmlFor="image" className="form-label">
                       Uy rasmi:
                     </label>
@@ -118,7 +114,7 @@ const handleSubmit = async (e) => {
                       required
                     />
                   </div>
-                  <div className="col-6 mb-3">
+                  <div className="col-lg-6 mb-3">
                     <label htmlFor="price" className="form-label">
                       Narx (USD):
                     </label>
@@ -133,7 +129,7 @@ const handleSubmit = async (e) => {
 
                     />
                   </div>
-                  <div className="col-6 mb-3">
+                  <div className="col-lg-6 mb-3">
                     <label htmlFor="address" className="form-label">
                       Viloyat:
                     </label>
@@ -148,7 +144,7 @@ const handleSubmit = async (e) => {
 
                     />
                   </div>
-                  <div className="col-6 mb-3">
+                  <div className="col-lg-6 mb-3">
                     <label htmlFor="address" className="form-label">
                       Shaxar:
                     </label>
@@ -163,7 +159,7 @@ const handleSubmit = async (e) => {
 
                     />
                   </div>
-                  <div className="col-6 mb-3">
+                  <div className="col-lg-6 mb-3">
                     <label htmlFor="address" className="form-label">
                       Tuman:
                     </label>
@@ -178,7 +174,7 @@ const handleSubmit = async (e) => {
 
                     />
                   </div>
-                  <div className="col-6 mb-3">
+                  <div className="col-lg-6 mb-3">
                     <label htmlFor="area" className="form-label ">
                       Uy maydoni (kv.m):
                     </label>
@@ -193,7 +189,7 @@ const handleSubmit = async (e) => {
 
                     />
                   </div>
-                  <div className="col-6 mb-3">
+                  <div className="col-lg-6 mb-3">
                     <label className="form-label">Type:</label>
                     <select
                       name="type"
@@ -207,7 +203,7 @@ const handleSubmit = async (e) => {
                       <option value="rent">Arenda</option>
                     </select>
                   </div>
-                  <div className="col-6 mb-3">
+                  <div className="col-lg-6 mb-3">
                     <label className="form-label">Uy tur:</label>
                     <select
                       name="tur"
@@ -266,7 +262,7 @@ const handleSubmit = async (e) => {
 
                 </div>
 
-                <button type="submit"  className="btn btn-success">
+                <button type="submit" className="btn btn-success">
                   Saqlash
                 </button>
               </form>

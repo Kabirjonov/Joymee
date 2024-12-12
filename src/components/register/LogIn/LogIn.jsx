@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';  // Axios kutubxonasini import qilish
 import { toast, ToastContainer } from 'react-toastify';
 import Cookies from 'js-cookie'
+
 const LogIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -37,24 +38,19 @@ const LogIn = () => {
         } catch (error) {
             console.error('Error connecting to the server:', error);
             if (error.response) {
-                // Server returned an error
                 toast.error(error.response.data || 'Something went wrong. Please try again.');
             } else {
-                // Network error or server down
                 toast.error('Network error. Please check your connection.');
             }
         }
     };
-
     return (
         <>
             <div className="row login_page h100 w-100">
-                {/* <ToastContainer /> */}
                 <div className="col-xl-4 col-lg-6 col-sm-6 align-self-center">
                     <div className="shadow p-3 mx-5 bg-dark rounded text-light">
                         <h3 className="text-center card__title text-warning pb-3">Sign In</h3>
                         <Form onSubmit={handleSubmit}>
-                            {/* Email Input */}
                             <FormGroup>
                                 <Label for="exampleEmail" className="mb-2">Email</Label>
                                 <Input
@@ -69,8 +65,6 @@ const LogIn = () => {
                                     required
                                 />
                             </FormGroup>
-
-                            {/* Password Input */}
                             <FormGroup>
                                 <Label for="examplePassword" className="mb-2">Password</Label>
                                 <Input

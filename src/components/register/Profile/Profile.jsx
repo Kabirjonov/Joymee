@@ -44,7 +44,6 @@ export default function Profile() {
 
       // FormData yaratish
       const formData = new FormData();
-      formData.append('file', userData.file || '');
       formData.append('firstName', userData.firstName);
       formData.append('lastName', userData.lastName);
       formData.append('email', userData.email);
@@ -52,6 +51,11 @@ export default function Profile() {
       formData.append('birthday', birthdayDate || '');
       formData.append('gender', userData.gender);
       formData.append('bio', userData.bio);
+
+      // Rasm tanlanganligini tekshirish
+      if (userData.file) {
+          formData.append('file', userData.file);
+      }
       console.log("Backendga Janatilyotgan malumotlar: ", formData)
       // So‘rov yuborish
       const response = await axios.put('http://localhost:3001/api/profile', formData, {
@@ -91,7 +95,6 @@ export default function Profile() {
       } catch (err) {
         toast.error(err.message)
       }
-
     }
     fetch()
   }, [setUserData])
@@ -108,10 +111,11 @@ export default function Profile() {
           <div className="container">
             <form className="contact__form border p-4 shadow" onSubmit={handleSave}>
               <div className="mb-4 m-auto profile-container" style={{ width: '120px', height: '120px', position: 'relative' }}>
+                {/* <img src="http://localhost:3001/uploads/1733894875578-evil-corp.jpg" className="rounded-circle border border-dark w-100 h-100" /> */}
                 {userData.fileUrl ? (
                   <img
                     src={userData.fileUrl}
-                    alt="Profile"
+                    // alt="Profile"
                     className="rounded-circle border border-dark w-100 h-100"
                   />
                 ) : (
@@ -129,7 +133,15 @@ export default function Profile() {
                       type="file"
                       accept="image/*"
                       style={{ display: 'none' }}
-                      onChange={(e) => setUserData(prevState => ({ ...prevState, file: e.target.files[0] }))}
+                      onChange={(e) => {
+                        if (e.target.files && e.target.files[0]) {
+                            setUserData(prevState => ({
+                                ...prevState,
+                                file: e.target.files[0],
+                                fileUrl: URL.createObjectURL(e.target.files[0]) // Rasmni oldindan ko‘rsatish
+                            }));
+                        }
+                    }}
                     />
                   </>
                 )}

@@ -5,7 +5,7 @@ import Footer from '../home/footer/Footer';
 import './contact.css';
 import { Row, Col } from 'reactstrap';
 import axios from 'axios'
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -48,7 +48,6 @@ export default function Contact() {
   return (
     <>
       <section className="about">
-      <ToastContainer />
         <Back name="Contact Us" title="Get Help & Friendly Support" cover={img} />
         <section className="contact mt-5 mb-5">
           <div className="container">

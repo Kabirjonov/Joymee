@@ -38,18 +38,24 @@ export default function Header() {
     });
     if(result.isConfirmed){
       try {
-        await axios.delete('http://localhost:3001/api/profile', {
+        const response = await axios.delete('http://localhost:3001/api/profile', {
           headers: {
             'x-auth-token': token,
             'Content-Type': 'application/json',
           },
         })
-        Cookies.remove('token');  // Tokenni o'chirish
-        navigate('/signin', { replace: true });  // Sign In sahifasiga yo'naltirish
-        toast.info('Sizning account o`chirildi')
-        Swal.fire("O‘chirildi!", "Hisobingiz muvaffaqiyatli o‘chirildi.", "success");
+      navigate('/signin', { replace: true });  // Redirect to sign-in page
+          Cookies.remove('token');  // Remove the token
+          toast.info('Sizning account o`chirildi');
+          // Swal.fire("O‘chirildi!", "Hisobingiz muvaffaqiyatli o‘chirildi.", "success");
       } catch (err) {
-        Swal.fire("Xato!", "Hisobni o‘chirishda xatolik yuz berdi.", "error");
+        if(err.response&&err.response.status==422){
+          Swal.fire("O`chirilmadi!",err.response.data.message, "error");
+        }
+        else{
+          Swal.fire("Xato!", "Hisobni o‘chirishda xatolik yuz berdi.", "error");
+        }
+    
       }
     }
     else{
@@ -82,7 +88,7 @@ export default function Header() {
                 </li>
               )}
             </ul>
-            <div className="navbar__login-page d-flex align-items-center">
+            <div className="navbar__login-page d-flex justify-content-center align-items-center ">
               <Dropdown className="navbar__mode mx-2">
                 <Dropdown.Toggle variant="" id="dropdown-basic" aria-label="Toggle theme">
                   <i className={toggleTheme === "light" ? "bi bi-brightness-high-fill" : "bi bi-moon-stars-fill"}></i>
@@ -111,6 +117,7 @@ export default function Header() {
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item as={Link} to="/profile" className='text-primary'>Profile</Dropdown.Item>
+                    <Dropdown.Item as={Link} to="/myhouses" className='text-primary'>Elonlar</Dropdown.Item>
                     <Dropdown.Item>
                       <button onClick={handleLogout} className="btn btn-link p-0 text-start">Logout</button>
                     </Dropdown.Item>

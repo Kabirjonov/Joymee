@@ -2,6 +2,7 @@ import React from 'react'
 import { footer } from '../../data/Data'
 import './footer.css'
 import { Link } from 'react-router-dom'
+import img from '../../images/logowhite.png'
 const Footer = () => {
     return (
         <>
@@ -22,7 +23,7 @@ const Footer = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col Footer__text-left">
-                            <img src={require('../../images/logo.png')} className='footer__img' alt="" />
+                            <img src={img} className='footer__img' alt="" />
                             <h3 className='mt-2 mb-3'>Do You Need Help With Anything?</h3>
                             <p className='p'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto dolores corrupti earum voluptatum perspiciatis accusamus?</p>
                             <div className="d-flex">

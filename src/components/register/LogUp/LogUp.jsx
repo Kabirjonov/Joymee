@@ -1,13 +1,13 @@
-import React, { useState,useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import '../style.css';
 import { FormGroup, Form, Label, Input, Button } from 'reactstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import {validatePhoneNumber} from '../validators'
+import { validatePhoneNumber } from '../validators'
 import Cookies from 'js-cookie'
-const SignUp = () => {
 
+const SignUp = () => {
     const [user, setUser] = useState({
         firstName: '',
         lastName: '',
@@ -17,11 +17,13 @@ const SignUp = () => {
         password: '',
         gender: '', // Changed from "male"  
     });
-    
     const navigate = useNavigate();
-
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUser({ ...user, [name]: value })
+    }
     const handleSubmit = async (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
         // console.log(user)
         // if(!validatePhoneNumber(user.phone)){
         //     toast.error('Invalid phone number format. Please check your input.');
@@ -30,13 +32,13 @@ const SignUp = () => {
         try {
             const response = await axios.post(
                 'http://localhost:3001/api/logup',
-                { 
+                {
                     firstName: user.firstName,
                     lastName: user.lastName,
                     email: user.email,
                     password: user.password,
                     phone: user.phone,
-                    birthday: user.birthday,    
+                    birthday: user.birthday,
                     gender: user.gender,
                 },
                 {
@@ -44,7 +46,6 @@ const SignUp = () => {
                     withCredentials: true,
                 }
             );
-
             if (response.status === 200) {
                 const token = response.headers['x-auth-token'];
                 if (token) {
@@ -68,7 +69,6 @@ const SignUp = () => {
             }
         }
     };
-
     return (
         <div className="row w-100 login_page h100">
             {/* <ToastContainer /> */}
@@ -87,7 +87,7 @@ const SignUp = () => {
                                         placeholder="Enter your name"
                                         className="p-2"
                                         value={user.firstName}
-                                        onChange={(e) => setUser({ ...user, firstName: e.target.value })}
+                                        onChange={handleChange}
                                         required
                                     />
                                 </FormGroup>
@@ -103,7 +103,7 @@ const SignUp = () => {
                                         className="p-2"
                                         value={user.lastName}
                                         onChange={(e) => setUser({ ...user, lastName: e.target.value })}
-                                        required            
+                                        required
                                     />
                                 </FormGroup>
                             </div>
