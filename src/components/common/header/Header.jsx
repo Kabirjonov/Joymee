@@ -103,10 +103,10 @@ export default function Header() {
                 <div className="d-flex align-items-center">
                   <img src={img} alt="Profile" className="border rounded-circle" style={{ height: '50px', width: '50px', objectFit: 'cover' }} />
                   <Dropdown className="navbar__profile-dropdown">
-                    <Dropdown.Toggle variant="link" id="profile-dropdown" aria-label="Profile">
+                    <Dropdown.Toggle variant="link" id="profile-dropdown" aria-label="Profile"  onClick={() => document.querySelector('.navbar-collapse').classList.remove('show')}>
                       Profile
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
+                    <Dropdown.Menu  onClick={() => document.querySelector('.navbar-collapse').classList.remove('show')}>
                       <Dropdown.Item as={Link} to="/profile">Profile</Dropdown.Item>
                       <Dropdown.Item as={Link} to="/myhouses">Elonlar</Dropdown.Item>
                       <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
@@ -115,7 +115,7 @@ export default function Header() {
                   </Dropdown>
                 </div>
               ) : (
-                <Link to="/signin" className="btn1" aria-label="Sign In">
+                <Link to="/signin" className="btn1" aria-label="Sign In"  onClick={() => document.querySelector('.navbar-collapse').classList.remove('show')}>
                   <i className="bi bi-box-arrow-right"></i> Sign In
                 </Link>
               )}
