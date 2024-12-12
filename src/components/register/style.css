@@ -26,3 +26,15 @@
     width: 100%;
     background: red;
 }
+
+@media (max-width: 800px) {
+    .FormLogupPage {
+      width: 100% !important;
+    }
+    .signUp{
+        font-size:  10px;
+    }
+    .mb-3{
+        margin: 0!important;
+    }
+  }

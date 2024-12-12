@@ -70,95 +70,95 @@ const SignUp = () => {
         }
     };
     return (
-        <div className="row w-100 login_page h100">
+        <div className="row w-100 login_page h00">
             {/* <ToastContainer /> */}
-            <div className="col-6 m-auto d-grid align-items-center">
-                <div className="shadow p-3 mx-5 bg-dark rounded text-light">
+            <div className="col-6 m-auto d-grid align-items-center FormLogupPage">
+                <div className="shadow mx-5 px-3 bg-dark rounded text-light">
                     <h3 className="text-center card__title text-warning pb-3">Sign Up</h3>
                     <Form onSubmit={handleSubmit}>
                         <div className="row">
-                            <div className="col-6">
+                            <div className="col-sm-6">
                                 <FormGroup>
-                                    <Label for="firstName" className="mb-2">Name</Label>
+                                    <Label for="firstName" className="mb-2 signUp">Name</Label>
                                     <Input
                                         id="firstName"
                                         name="firstName"
                                         type="text"
                                         placeholder="Enter your name"
-                                        className="p-2"
+                                        className="p-2 signUp"
                                         value={user.firstName}
                                         onChange={handleChange}
                                         required
                                     />
                                 </FormGroup>
                             </div>
-                            <div className="col-6">
+                            <div className="col-sm-6">
                                 <FormGroup>
-                                    <Label for="lastName" className="mb-2">Last Name</Label>
+                                    <Label for="lastName" className="mb-2 signUp">Last Name</Label>
                                     <Input
                                         id="lastName"
                                         name="lastName"
                                         type="text"
                                         placeholder="Enter your last name"
-                                        className="p-2"
+                                        className="p-2 signUp"
                                         value={user.lastName}
                                         onChange={(e) => setUser({ ...user, lastName: e.target.value })}
                                         required
                                     />
                                 </FormGroup>
                             </div>
-                            <div className="col-6">
+                            <div className="col-sm-6">
                                 <FormGroup>
-                                    <Label for="email" className="mb-2">Email</Label>
+                                    <Label for="email" className="mb-2 signUp">Email</Label>
                                     <Input
                                         id="email"
                                         name="email"
                                         type="email"
                                         placeholder="Enter your email"
-                                        className="p-2"
+                                        className="p-2 signUp"
                                         value={user.email}
                                         onChange={(e) => setUser({ ...user, email: e.target.value })}
                                         required
                                     />
                                 </FormGroup>
                             </div>
-                            <div className="col-6">
+                            <div className="col-sm-6">
                                 <FormGroup>
-                                    <Label for="phone" className="mb-2">Phone Number</Label>
+                                    <Label for="phone" className="mb-2 signUp">Phone Number</Label>
                                     <Input
                                         id="phone"
                                         name="phone"
                                         type="text"
                                         placeholder="Enter your phone number"
-                                        className="p-2"
+                                        className="p-2 signUp"
                                         value={user.phone}
                                         onChange={(e) => setUser({ ...user, phone: e.target.value })}
                                         required
                                     />
                                 </FormGroup>
                             </div>
-                            <div className="col-6">
+                            <div className="col-sm-6">
                                 <FormGroup>
-                                    <Label for="birthday" className="mb-2">Birthday</Label>
+                                    <Label for="birthday" className="mb-2 signUp">Birthday</Label>
                                     <Input
                                         id="birthday"
                                         name="birthday"
                                         type="date"
-                                        className="p-2"
+                                        className="p-2 signUp"
                                         value={user.birthday}
                                         onChange={(e) => setUser({ ...user, birthday: e.target.value })}
                                         required
                                     />
                                 </FormGroup>
                             </div>
-                            <div className="col-6">
+                            <div className="col-sm-6">
                                 <FormGroup>
-                                    <Label for="gender" className="mb-2">Gender</Label>
+                                    <Label for="gender" className="mb-2 signUp">Gender</Label>
                                     <Input
                                         id="gender"
                                         name="gender"
                                         type="select"
-                                        className="p-2"
+                                        className="p-2 signUp"
                                         value={user.gender}
                                         onChange={(e) => setUser({ ...user, gender: e.target.value })}
                                         required
@@ -169,15 +169,15 @@ const SignUp = () => {
                                     </Input>
                                 </FormGroup>
                             </div>
-                            <div className="col-12">
+                            <div className="col-lg-12">
                                 <FormGroup>
-                                    <Label for="password" className="mb-2">Password</Label>
+                                    <Label for="password" className="mb-2 signUp">Password</Label>
                                     <Input
                                         id="password"
                                         name="password"
                                         type="password"
                                         placeholder="Enter your password"
-                                        className="p-2"
+                                        className="p-2 signUp"
                                         value={user.password}
                                         onChange={(e) => setUser({ ...user, password: e.target.value })}
                                         required
