@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 import img from '../../images/room.jpg';
 import axios from 'axios';
 import { toast } from "react-toastify";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 
 export default function Header() {
   const token = Cookies.get('token');
@@ -26,16 +26,16 @@ export default function Header() {
   }
 
   async function DelAccount() {
-    const result = await Swal.fire({
-      title: "Hisobni o‘chirish",
-      text: "Haqiqatan ham hisobingizni o‘chirmoqchimisiz?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Ha, o‘chir!",
-      cancelButtonText: "Yo‘q, bekor qil!",
-      reverseButtons: true,
-    });
-    if (result.isConfirmed) {
+    // const result = await Swal.fire({
+    //   title: "Hisobni o‘chirish",
+    //   text: "Haqiqatan ham hisobingizni o‘chirmoqchimisiz?",
+    //   icon: "warning",
+    //   showCancelButton: true,
+    //   confirmButtonText: "Ha, o‘chir!",
+    //   cancelButtonText: "Yo‘q, bekor qil!",
+    //   reverseButtons: true,
+    // });
+    // if (result.isConfirmed) {
       try {
         await axios.delete('http://localhost:3001/api/profile', {
           headers: {
@@ -47,16 +47,18 @@ export default function Header() {
         navigate('/signin', { replace: true });
         toast.info('Sizning account o`chirildi');
       } catch (err) {
-        Swal.fire(
-          "Xato!",
-          err.response && err.response.status === 422
-            ? err.response.data.message
-            : "Hisobni o‘chirishda xatolik yuz berdi.",
-          "error"
-        );
+        // Swal.fire(
+        //   "Xato!",
+        //   err.response && err.response.status === 422
+        //     ? err.response.data.message
+        //     : "Hisobni o‘chirishda xatolik yuz berdi.",
+        //   "error"
+        // );
+        toast.info('Sizning account o`chirildi');
+        
       }
     } else {
-      Swal.fire("Bekor qilindi", "Hisobingiz saqlab qolindi.", "info");
+      // Swal.fire("Bekor qilindi", "Hisobingiz saqlab qolindi.", "info");
     }
   }
 
