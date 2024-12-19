@@ -1,0 +1,19 @@
+Frontend:
+	0) Sotuvchini email bilan emas tel nomer bilan royxxatdan otgazishno yolga qoyish
+	1) Dashbard page ida mijozlar yangi uy elonlarini yuklash yasash
+	2) Blogdagi cardlarga koproq  tugmasini qosish va bosilganda bir uyni toliq tavsilotlarini korsatadigan page yasash
+	3) Blogdagi Cardga sotuvchini accounitni qoshish va u bosilganda sotuvchi boicha toloq malumot berish page yasash
+	5) Extimol: Balki oxirida sotuvchi va xaridor uchun chat loyxasini xam yasash
+backend:
+	1) sotuvchini profile malumotlarini qabul qilib basa ga yuklash va saqlash, kerak bolganda qaytarish
+	2) Sotuvchi joylashtirgan uy malumotlarini bazaga saqlash va sotuvchi accounti id bilan ulab qoyih
+
+
+xulas profile malumotlarini authorizatsiya vaqtida olish kerak unndan keyin emas
+royxatdan otgandan keyin bio va rasm malumotini olsa xam bo`laveradi
+
+bizga royhatdan otayotgan vaqtda {name,lastname,bithday,email,number,password,male} malumotlari kerak
+
+
+yangi pagelar 
+xozigrgacha sign in,up,dashbard page lari ishladi 

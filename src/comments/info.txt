@@ -1,0 +1,27 @@
+18.12.2024 saytning blogdagi search companenti ishlayapti baglar bor
+                                                        Bags
+    true 7)  blog pageida malumot search qilinnganda malumot yoq bolsa blog card koinmasin
+    1)  backenda databasada malumot xariflar katta kichikligi farq qilyapti frontendan kichik yoki katta
+        xarifdagi malumot qidirilsa databasada xarif qidiruvi farqlanyapti bunituztish uchun yozilgan
+        // { viloyat: { $regex: location, $options: 'i' }}, code esa xech qanday malumot qaytarmayapti
+    true 2)  home hero ichida bosh saxifada korinib turuvchi search componentdan malumot qidirib bolmayapti
+        chunki search qilingan malumot blogda korinish uchun uni blog pageda onSearch functioni bilan 
+        ishlatganman home hero da esa onSearch yoq qoshib ham bolmaydi chunki search qilingan malumot keyin 
+        korinish xam kerak, buni togirlash uchun home hero ichidagi search tugmasi bosilganda bog saxifasiga
+        olib otadigan qilish kerak
+    true 3)  dashboarda mijoz uy rasmini qoshayotganda faqat bitta rasm qoshishilyapti,lekin bizga kamida uyning
+        3 rasmi kerak
+    4)  blog page va provile pagelarda uy va mijoz ImgUrl lari korinmayapti buni qanday tog`irlashni xozircha
+        bilmayman, lekin sinov uchun desktopda qurilgan tie projectida xammasi togri ishlayapti
+        // tuzatish bu yerda momo cors da yani frontend va beckendga fileUrl boyicha kirolmayapti
+        lekin browserda qidirganda kiraolyapti backendga demak xato fronenda bolsa kerak
+    5)  blog va boshqa house malumotlari korinadigan joylarda viloyat tuman shaxar link qilib berilgan va ularga bosilganda 
+        location cardinatalari yandex yoki google mapda ochilish kerak
+    6)  blog carda koproq korish tugmasi bosilganda aloxida oynaga olib otadigan pageda agar house malumot korinyotgan bolsa 
+        ostidan sotuvchi malumotixam korinish kerak,agar sotuvchi malumoti korinsa ostida sotilyotgan uylar xam korinish kerak
+
+
+
+
+    10) pojectni kichik baglarga qaramasdan serverga yuklayverish kerak backendini xam ishlaydigan qilib database bilan
+
