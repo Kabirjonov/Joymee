@@ -1,0 +1,18 @@
+.card {
+    border: none;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .slick-prev:before,
+  .slick-next:before {
+    color: #000;
+  }
+  
+  .card-img-top {
+    object-fit: cover;
+  }
+  

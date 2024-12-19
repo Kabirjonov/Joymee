@@ -70,7 +70,7 @@ export default function Header() {
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <div className="collapse navbar-collapse"style={{background:'var(--bone)'}} id="navbarSupportedContent">
             <ul className="navbar-nav mx-auto mb-2 mb-lg-0 navbar__item-ul">
               {nav.map((list, index) => (
                 <li className="nav-item navbar__item-li" key={index}>
@@ -102,18 +102,18 @@ export default function Header() {
                   <img src={img} alt="Profile" className="border rounded-circle" style={{ height: '50px', width: '50px', objectFit: 'cover' }} />
                   <Dropdown className="navbar__profile-dropdown">
                     <Dropdown.Toggle variant="link" id="profile-dropdown" aria-label="Profile">
-                      Profile
+                      Setting
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                      <Dropdown.Item as={Link} to="/profile">Profile</Dropdown.Item>
-                      <Dropdown.Item as={Link} to="/myhouses">Elonlar</Dropdown.Item>
-                      <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
-                      <Dropdown.Item onClick={DelAccount} className="text-danger">Delete Account</Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/profile" className='text-primary' onClick={() => document.querySelector('.navbar-collapse').classList.remove('show')}>Profile</Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/myhouses" className='text-primary' onClick={() => document.querySelector('.navbar-collapse').classList.remove('show')}>Elonlar</Dropdown.Item>
+                      <Dropdown.Item onClick={handleLogout}><div onClick={() => document.querySelector('.navbar-collapse').classList.remove('show')}>Logout</div></Dropdown.Item>
+                      <Dropdown.Item onClick={DelAccount} className="text-danger"><div onClick={() => document.querySelector('.navbar-collapse').classList.remove('show')}>Delete Account</div></Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
                 </div>
               ) : (
-                <Link to="/signin" className="btn1" aria-label="Sign In">
+                <Link to="/signin" className="btn1" aria-label="Sign In"  onClick={() => document.querySelector('.navbar-collapse').classList.remove('show')}>
                   <i className="bi bi-box-arrow-right"></i> Sign In
                 </Link>
               )}

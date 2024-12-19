@@ -12,9 +12,26 @@
   
    */
 
-   .navbar {
+.bg-for-Navbar{
+    background: var(--bone);
+    transition: 0.5s;
+    color: #fff;
+}
+
+/* .nav-link {
+    color: #000;
+    transition: color 0.5s ease; 
+}
+.navbar-collapse.show .nav-link {
+    color: #333; 
+} */
+
+.navbar {
     background-color: var(--bone);
     color: var(--text-color);
+  }
+  .navbar-toggler.show{
+    background-color: red;
   }
 .span{
     background: var(--logoColor);
@@ -99,4 +116,5 @@ nav{
     .navar__logo-img{
         height: 35px;        
     }
+   
 }

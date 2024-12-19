@@ -42,3 +42,10 @@ footer{
         font-size: 15px;
     }
 }
+@media screen and (max-width:576px){
+
+    .Footer__text-left p,.IFMiniNone,.footerContact{
+        display: none !important;
+    }
+  
+}

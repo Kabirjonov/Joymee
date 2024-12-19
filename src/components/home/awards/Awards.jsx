@@ -12,7 +12,7 @@ export default function Awards() {
             <div className="row mtop">
                 {awards.map((val,index)=>{
                     return(
-                        <div className="col text-center awards">
+                        <div className="col-lg-3 col-6 text-center awards">
                         <div className="awards__icon">
                             <span>{val.icon}</span>
                         </div>

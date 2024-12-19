@@ -3,7 +3,7 @@ import './header/header.css'
 export default function Heading({title,subtitle,SpecialClass,size}) {
   return (
     <>
-      <div className={`heading ${SpecialClass} `}>
+      <div className={`heading ${SpecialClass}`}>
         <h1 className='heading_h1'>{title}</h1>
         <p className={`${size}`}>{subtitle}</p>
       </div>

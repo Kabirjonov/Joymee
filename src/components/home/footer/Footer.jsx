@@ -23,10 +23,10 @@ const Footer = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col Footer__text-left">
-                            <img src={img} className='footer__img' alt="" />
+                            <img src={img} className='footer__img mb-2' alt="" />
                             <h3 className='mt-2 mb-3'>Do You Need Help With Anything?</h3>
                             <p className='p'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto dolores corrupti earum voluptatum perspiciatis accusamus?</p>
-                            <div className="d-flex">
+                            <div className="d-flex IFMiniNone">
                                 <input type="text" className='w-100 rounded border-0 p-2' placeholder='Email Address'/>
                                 <button placeholder='Email Address' className="btn btn-warning text-dark">Submit</button>
                             </div>

@@ -7,6 +7,7 @@ import Services from '../service/Service';
 import Blog from '../blog/Blog';
 import Contact from '../contact/Contact';
 import MyHouses from '../myhouse/myhouses'
+import House from '../house/house'
 import LogIn from '../register/LogIn/LogIn';
 import LogUp from '../register/LogUp/LogUp';
 import ProtectedRoute from '../dashboard/ProtectedRoute'
@@ -28,6 +29,7 @@ export default function Pages() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/signin" element={<LogIn />} />
                 <Route path="/signup" element={<LogUp />} />
+                <Route path="/One" element={<House />} />
                 <Route path="/dashboard" element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />
                 <Route path="/dashboard" element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />
                 <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />

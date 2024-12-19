@@ -3,7 +3,7 @@ import '../style.css';
 import { FormGroup, Form, Label, Input, Button } from 'reactstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { toast ,ToastContainer} from 'react-toastify';
 import { validatePhoneNumber } from '../validators'
 import Cookies from 'js-cookie'
 
@@ -50,7 +50,7 @@ const SignUp = () => {
                 const token = response.headers['x-auth-token'];
                 if (token) {
                     Cookies.set('token', token, { expires: 7 })
-                    toast.success('Registration successful! Redirecting...');
+                    toast.success(response.data.message||'Registration successful! Redirecting...');
                     setTimeout(() => {
                         navigate('/dashboard');
                     }, 2000);
@@ -58,7 +58,7 @@ const SignUp = () => {
                     toast.error('Token not provided in response headers. Please try again.');
                 }
             } else {
-                toast.error(response.data.message || 'User creation failed! Please try again.');
+                toast.error(response.data.message||'User creation failed! Please try again.');
             }
         } catch (err) {
             console.error('Error:', err);
@@ -71,10 +71,10 @@ const SignUp = () => {
     };
     return (
         <div className="row w-100 login_page h00">
-            {/* <ToastContainer /> */}
+            <ToastContainer/>
             <div className="col-6 m-auto d-grid align-items-center FormLogupPage">
-                <div className="shadow mx-5 px-3 bg-dark rounded text-light">
-                    <h3 className="text-center card__title text-warning pb-3">Sign Up</h3>
+                <div className="shadow mx-5 p-3 bg-dark rounded text-light">
+                    <h3 className="text-center mb-2 card__title text-warning">Sign Up</h3>
                     <Form onSubmit={handleSubmit}>
                         <div className="row">
                             <div className="col-sm-6">

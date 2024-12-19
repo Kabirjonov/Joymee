@@ -1,35 +1,48 @@
 import React from 'react';
-import {Card,CardBody,CardTitle,CardSubtitle,CardText,Button} from 'reactstrap'
-import {Link} from 'react-router-dom'
-const Agent = () => {
+import { Card, CardBody, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap'
+import { Link } from 'react-router-dom'
+import { IoPersonSharp } from "react-icons/io5";
+
+const Agent = ({ agent }) => {
+    const { firstName, lastName, phone, _id, email, bio, fileUrl } = agent
     return (
-        <div>
+        <div className='d-flex justify-content-center align-items-center'>
             <Card
                 style={{
-                    width: '18rem'
+                    width: '90%',
                 }}
-                className='text-center p-1 mx-2'
+                key={_id}
+                className='text-center p-2  border '
             >
-                <img
+                {fileUrl ? (
+                    <img
+                        src={fileUrl}
+                        // alt="Profile"
+                        className="rounded-circle border border-dark w-100 h-100"
+                    />
+                ) : (
+                    <IoPersonSharp className="icon_forPerson rounded-circle border border-dark w-50  m-auto" />
+                )}
+                {/* <img
                     alt="Sample"
                     src="https://picsum.photos/300/200"
                     className='rounded-circle w-50 h-75 m-auto'
-                />
+                /> */}
                 <CardBody>
                     <CardTitle tag="h5">
-                        Anvar Botirov
+                        {firstName}
                     </CardTitle>
                     <CardSubtitle
                         className="mb-2 text-muted"
                         tag="h6"
                     >
-                        Uy Sotuvchisi
+                        {phone}
                     </CardSubtitle>
                     <CardText>
-                        Some quick example text to build on the card title and make up the bulk of the card‘s content.
+                        {bio}
                     </CardText>
-                    <Link  className='btn btn-outline-warning'>
-                        Profileni korish
+                    <Link to={`/One`}state={{id:_id}} className='btn btn-outline-warning'>{/* bu yerda  */}
+                        Sotuvchisi
                     </Link>
                 </CardBody>
             </Card>

@@ -1,34 +1,29 @@
-import React, { useState, useEffect } from 'react'
+import  React,{useState} from 'react'
 import Card from 'react-bootstrap/Card';
-import { CardBody, CardTitle, CardText, CardSubtitle, ListGroup, UncontrolledCarousel } from 'reactstrap'
+import { CardBody, CardTitle, CardText, CardSubtitle, ListGroup, UncontrolledCarousel, Toast } from 'reactstrap'
 import {Link} from 'react-router-dom'
-import axios from 'axios'
-
 import { list } from '../../data/Data'// bu faqat xozirchalik 
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { MdAttachMoney } from "react-icons/md";
+import axios from 'axios';
+import { FcLike } from "react-icons/fc";
 
 
-export default function RecentCard() {
-  const [houses, setHouses] = useState([])
-  useEffect(() => {
-    const fetch = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/api/blog')
-        setHouses(response.data)
-        console.log(response.data)
-      } catch (err) {
-      }
+export default function RecentCard({houses}) {
+  const [liked,setLiked]=useState(false)
+
+  const handleLike=async(id)=>{
+    if(!liked){
+      // await axios.put(`http://localhost:3001/api/blog/${id}`)
+      setLiked(!liked)
     }
-    fetch()
-  }, [])
-  var SU = "For Sale"
+  }
   // agar sotuv uchun va aranda uchun sozlarini o`zbekchaga tarjima qilish kerak bolsa su qiymati ozgartir
   return (
     <>
       {houses.length === 0 ? (
         <>
-          <h3 className="heading_h1 text-center mb-2" style={{ textTransform: "initial" }}>Xech qanday elon mavjud emas!</h3>
+          <h3 className="heading_h1 text-center mt-5" style={{ textTransform: "initial" }}>Xech qanday elon mavjud emas!</h3>
         </>
       ) : (
         <div className="row mtop">
@@ -54,7 +49,7 @@ export default function RecentCard() {
                         key: 3,
                         src: 'https://picsum.photos/id/678/1200/600'
                       }
-                    ]}
+                    ]}// bu yerda odiy rasm ishlatishni orniga backendan kelgan url ishlatish kerak
                   />
 
                   <CardBody>
@@ -65,8 +60,10 @@ export default function RecentCard() {
                       >
                         For {house.type}
                       </CardSubtitle>
-                      <div className="m-3"></div>
-                      <i className="bi bi-heart-fill text-muted" style={{ fontSize: "20px" }}></i>
+                      {/* <div className="d-grid">
+                      <i  className={`bi bi-heart-fill text-muted ${liked?'text-danger':'text-muted'}`} onClick={()=>handleLike(house._id)} style={{color:'red', fontSize: "20px",cursor:'pointer' }}></i>
+                      {house.Islike}
+                      </div> */}
                     </div>
                     {/* <CardTitle tag="h5" className='' style={{ fontWeight: 600, letterSpacing: "0px" }}>
                         {val.name}
@@ -77,23 +74,22 @@ export default function RecentCard() {
                         className="font-weight-light " style={{ color: "var(--p)", marginLeft: "5px" }}
                         tag="h6"
                       >
-                        {house.viloyat + " " + house.shaxar + " " + house.tuman}/
+                        {house.viloyat + " " + house.shaxar + " " + house.tuman}
                         {/* bu yerga xam locationi bosganda yandex locationga olib otish kerak */}
                       </CardSubtitle>
                     </div>
                     <CardText>
-                      {/* {house.comment} hozircha xunuk koringani uchun ochirib qoydim*/}
-                      Some quick example text to build on the card title and make up the bulk of the card‘s content.
+                      {house.comment}{/*  hozircha xunuk koringani uchun ochirib qoydim */}
+                      {/* Some quick example text to build on the card title and make up the bulk of the card‘s content. */}
                     </CardText>
                     <div className="d-flex justify-content-between align-items-center">
                     <button className='btn btn-warning  ' >
                       {house.price}<MdAttachMoney />
                     </button>
-                    <Link to={"/Onehouse"} className='btn btn-outline-dark ' >
+                    <Link to={`/One`} state={{id:house._id}} className='btn btn-outline-dark ' >
                       Koproq korish
                     </Link>
                     </div>
-                   
                   </CardBody>
                 </Card>
               </div>

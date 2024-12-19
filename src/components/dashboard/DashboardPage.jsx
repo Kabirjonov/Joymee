@@ -6,33 +6,42 @@ import { YMaps, Map, Placemark, GeolocationControl } from '@pbe/react-yandex-map
 import axios from 'axios'
 import './style.css'
 import Cookies from 'js-cookie'
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import Basic from '../OtherPageStyle/basic';
 const Dashboard = () => {
-  const token = Cookies.get('token')
-  const [userLocation, setUserLocation] = useState(null); // Default to Toshkent [41.311081, 69.240562]
+  const token = Cookies.get('token');
+  const [userLocation, setUserLocation] = useState(null);
   const [houseData, setHouseData] = useState({
-    file: null,
+    files: [],
     price: "",
     viloyat: "",
-    shaxar: "",// 
+    shaxar: "",
     tuman: "",
-    type: "sell", // 'sale' yoki 'rent'
-    tur: "house",// hovli yoki dom,bino
+    type: "sell",
+    tur: "house",
     area: "",
-    coordinates: [], // Default coordinates
+    coordinates: [],
     comment: "",
-    fileName: "",
-    fileUrl: "",
   });
 
   const handleChange = (e) => {
-    const { files, name, value } = e.target;
-    setHouseData({ ...houseData, [name]: files ? files[0] : value })
-  }
+    const { name, value, files } = e.target;
+    if (name === "files") {
+      if (files.length > 5) {
+        toast.error("Faqat 5 tagacha fayl yuklash mumkin.");
+        return;
+      }
+      setHouseData({ ...houseData, files: Array.from(files) });
+    } else {
+      setHouseData({ ...houseData, [name]: value });
+    }
+  };
+
   const handleMapClick = (e) => {
     const coords = e.get("coords");
     setHouseData({ ...houseData, coordinates: coords });
   };
+
   const handleFindMe = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -51,7 +60,6 @@ const Dashboard = () => {
     }
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (houseData.coordinates.length < 2) {
@@ -62,215 +70,212 @@ const Dashboard = () => {
     Object.entries(houseData).forEach(([key, value]) => {
       if (key === "coordinates" && Array.isArray(value)) {
         formData.append(key, JSON.stringify(value));
+      } else if (key === "files") {
+        value.forEach(file => formData.append("files", file));
       } else {
-        // Boshqa kalitlar uchun qiymatni to'g'ridan-to'g'ri yuboramiz
         formData.append(key, value);
       }
     });
 
     try {
-      const response = await axios.post("http://localhost:3001/api/dashboard", formData, {
-        headers: {
-          'x-auth-token': token,  // Fayl bilan yuborilgani uchun Content-Type ni o‘chirib tashlang
-        },
+      await axios.post("http://localhost:3001/api/dashboard", formData, {
+        headers: { 'x-auth-token': token },
       });
-      // console.log("Yuborildi!", response);
-      // console.log("HouseData!", houseData);
       toast.success("E'lon muvaffaqiyatli qo‘shildi!");
-      setHouseData({})
-      // setHouseData(); // Tozalash  
+      setHouseData({
+        files: [],
+        price: "",
+        viloyat: "",
+        shaxar: "",
+        tuman: "",
+        type: "sell",
+        tur: "house",
+        area: "",
+        coordinates: [],
+        comment: "",
+      });
     } catch (error) {
       console.error("Xatolik yuz berdi:", error);
       toast.error("Xatolik yuz berdi.");
     }
   };
-
-
   return (
     <>
-      <section className="about">
-        <Back name="Contact Us" title="Get Help & Friendly Support" cover={img} />
-        <section className="contact mt-5 mb-5">
-          <div className="container">
-            <div className="contact__form border p-4 shadow ">
-              <h1
-                className="text-warning btnForAddNewHouse mb-3 text-center"
-              >
-                Yangi e'lon qo'shish
-              </h1>
+      <ToastContainer />
+      <Basic name="Contact Us" title="Get Help & Friendly Support" cover={img}>
+        <h1
+          className="text-warning btnForAddNewHouse mb-3 text-center"
+        >
+          Yangi e'lon qo'shish
+        </h1>
 
-              <form onSubmit={handleSubmit} >
-                <div className="row">
-                  <div className="col-lg-6 mb-3">
-                    <label htmlFor="image" className="form-label">
-                      Uy rasmi:
-                    </label>
-                    <input
-                      type="file"
-                      id="image"
-                      name="file"
-                      className="form-control"
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                  <div className="col-lg-6 mb-3">
-                    <label htmlFor="price" className="form-label">
-                      Narx (USD):
-                    </label>
-                    <input
-                      type="number"
-                      id="price"
-                      name="price"
-                      className="form-control"
-                      value={houseData.price}
-                      onChange={handleChange}
-                      required
-
-                    />
-                  </div>
-                  <div className="col-lg-6 mb-3">
-                    <label htmlFor="address" className="form-label">
-                      Viloyat:
-                    </label>
-                    <input
-                      type="text"
-                      id="address"
-                      name="viloyat"
-                      className="form-control"
-                      value={houseData.viloyat}
-                      onChange={handleChange}
-                      required
-
-                    />
-                  </div>
-                  <div className="col-lg-6 mb-3">
-                    <label htmlFor="address" className="form-label">
-                      Shaxar:
-                    </label>
-                    <input
-                      type="text"
-                      id="address"
-                      name="shaxar"
-                      className="form-control"
-                      value={houseData.shaxar}
-                      onChange={handleChange}
-                      required
-
-                    />
-                  </div>
-                  <div className="col-lg-6 mb-3">
-                    <label htmlFor="address" className="form-label">
-                      Tuman:
-                    </label>
-                    <input
-                      type="text"
-                      id="address"
-                      name="tuman"
-                      className="form-control"
-                      value={houseData.tuman}
-                      onChange={handleChange}
-                      required
-
-                    />
-                  </div>
-                  <div className="col-lg-6 mb-3">
-                    <label htmlFor="area" className="form-label ">
-                      Uy maydoni (kv.m):
-                    </label>
-                    <input
-                      type="number"
-                      id="area"
-                      name="area"
-                      className="form-control"
-                      value={houseData.area}
-                      onChange={handleChange}
-                      required
-
-                    />
-                  </div>
-                  <div className="col-lg-6 mb-3">
-                    <label className="form-label">Type:</label>
-                    <select
-                      name="type"
-                      className="form-select"
-                      value={houseData.type}
-                      onChange={handleChange}
-                      required
-
-                    >
-                      <option value="sell">Sotuv</option>
-                      <option value="rent">Arenda</option>
-                    </select>
-                  </div>
-                  <div className="col-lg-6 mb-3">
-                    <label className="form-label">Uy tur:</label>
-                    <select
-                      name="tur"
-                      className="form-select"
-                      value={houseData.tur}
-                      onChange={handleChange}
-                      required
-
-                    >
-                      <option value="house">Hovli</option>
-                      <option value="apartment">Do`m</option>
-                    </select>
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="address" className="form-label">
-                      Comment:
-                    </label>
-                    <textarea
-                      placeholder='Comment'
-                      type="text"
-                      id="address"
-                      name="comment"
-                      className="form-control"
-                      value={houseData.comment}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                </div>
-
-
-                <div className="mb-3">
-                  <label className="form-label">Xaritada joyni belgilang:</label>
-                  <YMaps>
-                    <Map
-                      defaultState={{
-                        center: [41.311081, 69.240562],
-                        zoom: 10,
-                      }}
-                      width="100%"
-                      height="300px"
-                      onClick={handleMapClick}
-                    >
-                      {/* User-selected marker */}
-                      <Placemark geometry={houseData.coordinates} />
-                      <GeolocationControl onClick={() => handleFindMe()} options={{
-                        float: "right", // Position of the button on the map
-                      }} required />
-                      {userLocation && <Placemark geometry={userLocation} required />}
-                    </Map>
-                  </YMaps>
-                  <p>
-                    {/* Tanlangan koordinatalar: {houseData.coordinates[0]},{" "} */}
-                    {/* {houseData.coordinates[1]} */}
-                  </p>
-
-                </div>
-
-                <button type="submit" className="btn btn-success">
-                  Saqlash
-                </button>
-              </form>
+        <form onSubmit={handleSubmit} >
+          <div className="row">
+          <div className="col-lg-6 mb-3">
+              <label className="form-label">Uy rasmlari (1-5):</label>
+              <input
+                type="file"
+                name="files"
+                className="form-control"
+                onChange={handleChange}
+                multiple
+                required
+              />
             </div>
+            <div className="col-lg-6 mb-3">
+              <label htmlFor="price" className="form-label">
+                Narx (USD):
+              </label>
+              <input
+                type="number"
+                id="price"
+                name="price"
+                className="form-control"
+                value={houseData.price}
+                onChange={handleChange}
+                required
+
+              />
+            </div>
+            <div className="col-lg-6 mb-3">
+              <label htmlFor="address" className="form-label">
+                Viloyat:
+              </label>
+              <input
+                type="text"
+                id="address"
+                name="viloyat"
+                className="form-control"
+                value={houseData.viloyat}
+                onChange={handleChange}
+                required
+
+              />
+            </div>
+            <div className="col-lg-6 mb-3">
+              <label htmlFor="address" className="form-label">
+                Shaxar:
+              </label>
+              <input
+                type="text"
+                id="address"
+                name="shaxar"
+                className="form-control"
+                value={houseData.shaxar}
+                onChange={handleChange}
+                required
+
+              />
+            </div>
+            <div className="col-lg-6 mb-3">
+              <label htmlFor="address" className="form-label">
+                Tuman:
+              </label>
+              <input
+                type="text"
+                id="address"
+                name="tuman"
+                className="form-control"
+                value={houseData.tuman}
+                onChange={handleChange}
+                required
+
+              />
+            </div>
+            <div className="col-lg-6 mb-3">
+              <label htmlFor="area" className="form-label ">
+                Uy maydoni (kv.m):
+              </label>
+              <input
+                type="number"
+                id="area"
+                name="area"
+                className="form-control"
+                value={houseData.area}
+                onChange={handleChange}
+                required
+
+              />
+            </div>
+            <div className="col-lg-6 mb-3">
+              <label className="form-label">Type:</label>
+              <select
+                name="type"
+                className="form-select"
+                value={houseData.type}
+                onChange={handleChange}
+                required
+
+              >
+                <option value="sell">Sotuv</option>
+                <option value="rent">Arenda</option>
+              </select>
+            </div>
+            <div className="col-lg-6 mb-3">
+              <label className="form-label">Uy tur:</label>
+              <select
+                name="tur"
+                className="form-select"
+                value={houseData.tur}
+                onChange={handleChange}
+                required
+
+              >
+                <option value="house">Hovli</option>
+                <option value="apartment">Do`m</option>
+              </select>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="address" className="form-label">
+                Comment:
+              </label>
+              <textarea
+                placeholder='Comment'
+                type="text"
+                id="address"
+                name="comment"
+                className="form-control"
+                value={houseData.comment}
+                onChange={handleChange}
+              />
+            </div>
+
           </div>
-        </section>
-        <Footer />
-      </section>
+
+
+          <div className="mb-3">
+            <label className="form-label">Xaritada joyni belgilang:</label>
+            <YMaps>
+              <Map
+                defaultState={{
+                  center: [41.311081, 69.240562],
+                  zoom: 10,
+                }}
+                width="100%"
+                height="300px"
+                onClick={handleMapClick}
+              >
+                {/* User-selected marker */}
+                <Placemark geometry={houseData.coordinates} />
+                <GeolocationControl onClick={() => handleFindMe()} options={{
+                  float: "right", // Position of the button on the map
+                }} required />
+                {userLocation && <Placemark geometry={userLocation} required />}
+              </Map>
+            </YMaps>
+            <p>
+              {/* Tanlangan koordinatalar: {houseData.coordinates[0]},{" "} */}
+              {/* {houseData.coordinates[1]} */}
+            </p>
+
+          </div>
+
+          <button type="submit" className="btn btn-success">
+            Saqlash
+          </button>
+        </form>
+      </Basic>
+
     </>
   );
 };
