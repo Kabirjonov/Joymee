@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Back from '../back/Back';
-import Footer from '../home/footer/Footer';
 import img from '../images/room.jpg'
 import { toast } from 'react-toastify'
 import axios from 'axios'
@@ -15,7 +13,7 @@ const Myhouses = () => {
     const deleteItem = async (id) => {
         try {
             console.log(id)
-            const response = await axios.delete('http://localhost:3001/api/house', {
+            const response = await axios.delete(`${process.env.REACT_APP_API_URL}/api/myhouse`, {
                 data: { id: id },
                 headers: {
                     'x-auth-token': token,  // Fayl bilan yuborilgani uchun Content-Type ni o‘chirib tashlang
@@ -29,18 +27,18 @@ const Myhouses = () => {
     useEffect(() => {
         const getData = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/api/house', {
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/myhouse`, {
                     headers: {
                         'x-auth-token': token,  // Fayl bilan yuborilgani uchun Content-Type ni o‘chirib tashlang
                     },
                 })
                 if (response.status === 200) setHouses(response.data)
             } catch (err) {
-                toast.error(err.response.data.message)
+                console.log(err.response.data.message)
             }
         }
         getData()
-    }, [deleteItem])
+    }, [houses])
     return (
         <Basic name="Contact Us" title="Get Help & Friendly Support" cover={img}>
             {houses.length === 0 ? (

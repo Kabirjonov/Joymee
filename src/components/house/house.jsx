@@ -14,23 +14,23 @@ const House = () => {
     const { id } = location.state || {}
     useEffect(() => {
         if (!id) return navigate('/')
-        const getData = async (id) => {
+        const getData = async () => {
             try {
-                const response = await axios.get(`http://localhost:3001/api/info/${id}`);
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/info/${id}`);
                 if (response.status == 200) setData(response.data)
             }
             catch (err) {
                 toast.error(err.response.data.message)
             }
         }
-        getData(id)
-    }, [id, navigate])
+        getData()
+    }, [id])
     return (
-        <Basic name="" title="Information" cover={img}>
-            {data.firstName ? (
-                <User data={data} />
-            ) : (
-                <HouseInfo data={data} />
+        <Basic title="Information" cover={img}>
+            {!data&& (
+                <>
+                <HouseInfo data={data}/>
+                </>
             )}
         </Basic>
     );

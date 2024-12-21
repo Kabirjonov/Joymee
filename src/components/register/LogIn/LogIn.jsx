@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import '../style.css';
 import { FormGroup, Form, Label, Input, Button } from 'reactstrap';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,11 +9,12 @@ import Cookies from 'js-cookie'
 const LogIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const[showPass,setShowPass]=useState(false)
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3001/api/login', { email, password }, {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/login`, { email, password }, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -46,6 +47,7 @@ const LogIn = () => {
     };
     return (
         <>
+        <ToastContainer className="position-absolute"/>
             <div className="row login_page h100 w-100">
                 <div className="col-xl-4 col-lg-6 col-sm-6 align-self-center">
                     <div className="shadow p-3 mx-5 bg-dark rounded text-light">
@@ -70,7 +72,7 @@ const LogIn = () => {
                                 <Input
                                     id="examplePassword"
                                     name="password"
-                                    type="password"
+                                    type={showPass?'text':'password'}
                                     autoComplete="current-password"
                                     placeholder="Enter your password"
                                     className="p-2"
@@ -79,7 +81,10 @@ const LogIn = () => {
                                     required
                                 />
                             </FormGroup>
-
+                            <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1"onClick={()=>setShowPass(!showPass)} />
+                                        <label class="form-check-label" for="exampleCheck1">Show password</label>
+                                    </div>
                             {/* Buttons */}
                             <div className="d-flex justify-content-between align-items-center mt-4">
                                 <Button type="submit" className="bg-warning text-black border-0 px-4">

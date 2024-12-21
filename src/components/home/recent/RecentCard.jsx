@@ -14,7 +14,7 @@ export default function RecentCard({houses}) {
 
   const handleLike=async(id)=>{
     if(!liked){
-      // await axios.put(`http://localhost:3001/api/blog/${id}`)
+      // await axios.put(`${process.env.REACT_APP_API_URL}/api/blog/${id}`)
       setLiked(!liked)
     }
   }
@@ -33,23 +33,28 @@ export default function RecentCard({houses}) {
                 <Card className='shadow-lg border-0 p-2 mb-2 ronded '
                 >
                   <UncontrolledCarousel
-                    items={[
-                      {
-                        altText: 'Slide 1',
-                        key: 1,
-                        src: 'https://picsum.photos/id/123/1200/600'
-                      },
-                      {
-                        altText: 'Slide 2',
-                        key: 2,
-                        src: 'https://picsum.photos/id/456/1200/600'
-                      },
-                      {
-                        altText: 'Slide 3',
-                        key: 3,
-                        src: 'https://picsum.photos/id/678/1200/600'
-                      }
-                    ]}// bu yerda odiy rasm ishlatishni orniga backendan kelgan url ishlatish kerak
+                    // items={[
+                    //   {
+                    //     altText: 'Slide 1',
+                    //     key: 1,
+                    //     src: 'https://picsum.photos/id/123/1200/600'
+                    //   },
+                    //   {
+                    //     altText: 'Slide 2',
+                    //     key: 2,
+                    //     src: 'https://picsum.photos/id/456/1200/600'
+                    //   },
+                    //   {
+                    //     altText: 'Slide 3',
+                    //     key: 3,
+                    //     src: 'https://picsum.photos/id/678/1200/600'
+                    //   }
+                    // ]}// bu yerda odiy rasm ishlatishni orniga backendan kelgan url ishlatish kerak
+                      items={house.fileUrls.map((item,id) => ({
+                          altText: `Slide ${id+1}`,
+                          key: id,
+                          src: item
+                   }))}
                   />
 
                   <CardBody>

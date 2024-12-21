@@ -1,4 +1,4 @@
-  import React, { useState, useEffect } from 'react';
+  import React, { useState, useEffect ,useContext} from 'react';
   import img from '../../images/room.jpg';
   import { IoPersonSharp } from "react-icons/io5";
   import axios from 'axios';
@@ -8,8 +8,10 @@
   import { MdDelete } from "react-icons/md";
   import { MdAddAPhoto } from "react-icons/md";
   import Basic from '../../OtherPageStyle/basic';
+import { ClientContext } from './ProfileContext';
 
   export default function Profile() {
+    const {setClient}=useContext(ClientContext)
     const token = Cookies.get('token')
     const [check,setCheck]=useState(0)
     const [editing, setEditing] = useState(false)
@@ -57,7 +59,7 @@
         }
         console.log("Backendga Janatilyotgan malumotlar: ", formData)
         // So‘rov yuborish
-        const response = await axios.put('http://localhost:3001/api/profile', formData, {
+        const response = await axios.put(`${process.env.REACT_APP_API_URL}/api/profile`, formData, {
           headers: {
             'x-auth-token': token,  // Fayl bilan yuborilgani uchun Content-Type ni o‘chirib tashlang
           },
@@ -69,6 +71,9 @@
           // ...prevState,
           ...updatedUser,
         });
+        setClient({
+          ...updatedUser,
+        })
 
         toast.success(response.data.message || 'Upload is successfully');
         setEditing(false)
@@ -81,7 +86,7 @@
     useEffect(() => {
       const fetch = async () => {
         try {
-          const response = await axios.get('http://localhost:3001/api/profile', {
+          const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/profile`, {
             headers: {
               'x-auth-token': token,
               'Content-Type': 'application/json',
@@ -93,6 +98,10 @@
             ...response.data,
             birthday: new Date(response.data.birthday).toISOString().split('T')[0], // YYYY-MM-DD formatiga o'zgartirish
           });
+          setClient({
+            ...response.data,
+            birthday: new Date(response.data.birthday).toISOString().split('T')[0], 
+          })
           console.log('backenda get metodi bilan oninayotgan malumot',response.data)
           setCheck(1)
         } catch (err) {
@@ -109,11 +118,10 @@
     }, [check])
     return (
       <>
-      <ToastContainer/>
+      <ToastContainer className="position-absolute"/>
               <Basic name="Your Profile" title="Your settings" cover={img} >
               <form  onSubmit={handleSave}>
                 <div className="mb-4 m-auto profile-container" style={{ width: '120px', height: '120px', position: 'relative' }}>
-                  <img src="http://localhost:3001/uploads/1734624873761-evil-corp.jpg" className="rounded-circle border border-dark w-100 h-100" />
                   {userData.fileUrl ? (
                     <img
                       src={userData.fileUrl}

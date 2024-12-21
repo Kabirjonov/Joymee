@@ -15,7 +15,7 @@ export default function Recent() {
   const [totalPages, setTotalPages] = useState(1)
   const getData = async (page) => {
     try {
-      const response = await axios.get(`http://localhost:3001/api/blog/${page}`)
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/blog/${page}`)
       setHouses(response.data.houses)
       setTotalPages(response.data.totalPage)
     } catch (err) {
@@ -32,7 +32,7 @@ export default function Recent() {
   const handleSearch = async (data) => {
     console.log(data)
     try {
-      const response = await axios.get(`http://localhost:3001/api/search/${page}`, {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/search/${page}`, {
         params: data,
         headers: {
           'Content-Type': 'application/json',

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+  import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { nav } from "../../data/Data";
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -8,10 +8,14 @@ import Cookies from 'js-cookie';
 import img from '../../images/room.jpg';
 import axios from 'axios';
 import { toast } from "react-toastify";
+import { ClientContext } from '../../register/Profile/ProfileContext';
+import { IoPersonSharp } from "react-icons/io5";
+
 // import Swal from "sweetalert2";
 
 export default function Header() {
   const token = Cookies.get('token');
+  const {client}=useContext(ClientContext)
   const navigate = useNavigate();
   const [toggleTheme, setToggleTheme] = useState(() => localStorage.getItem('theme') || 'light');
 
@@ -37,15 +41,17 @@ export default function Header() {
     // });
     // if (result.isConfirmed) {
       try {
-        await axios.delete('http://localhost:3001/api/profile', {
+        const response = await axios.delete(`${process.env.REACT_APP_API_URL}/api/profile`, {
           headers: {
             'x-auth-token': token,
             'Content-Type': 'application/json',
           },
         });
-        Cookies.remove('token');
-        navigate('/signin', { replace: true });
-        toast.info('Sizning account o`chirildi');
+        if(response.status===204){
+          Cookies.remove('token');
+          navigate('/signin', { replace: true });
+          toast.info(response.data.message);
+        }
       } catch (err) {
         // Swal.fire(
         //   "Xato!",
@@ -54,7 +60,10 @@ export default function Header() {
         //     : "Hisobni o‘chirishda xatolik yuz berdi.",
         //   "error"
         // );
-        toast.info('Sizning account o`chirildi');
+        if(err.response.status===422){
+          toast.error(`Account o\`chirishdan oldin e\`lonlarni ochiring`,);
+
+        }
         
       }
     // } else {
@@ -101,7 +110,13 @@ export default function Header() {
               </Dropdown> */}
               {token ? (
                 <div className="d-flex align-items-center">
-                  <img src={img} alt="Profile" className="border rounded-circle" style={{ height: '50px', width: '50px', objectFit: 'cover' }} />
+                  {client?( 
+                  <img src={client.fileUrl} alt="Profile" className="border rounded-circle" style={{ height: '50px', width: '50px', objectFit: 'cover' }} />
+
+                  ):(
+                    <IoPersonSharp className="rounded-circle border border-dark" style={{ height: '50px', width: '50px', objectFit: 'cover' }}/>
+
+                  )}
                   <Dropdown className="navbar__profile-dropdown">
                     <Dropdown.Toggle variant="link" id="profile-dropdown" aria-label="Profile">
                       Setting

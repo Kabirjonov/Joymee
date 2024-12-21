@@ -73,7 +73,7 @@ export default function TestHeader() {
         });
         if (result.isConfirmed) {
             try {
-                await axios.delete('http://localhost:3001/api/profile', {
+                await axios.delete(`${process.env.REACT_APP_API_URL}/api/profile`, {
                     headers: {
                         'x-auth-token': token,
                         'Content-Type': 'application/json',

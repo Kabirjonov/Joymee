@@ -13,7 +13,7 @@ const Teams = () => {
     useEffect(() => {
         const getData = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/api/users',)
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/users`,)
                 if (response.status === 200) {
                     setAgents(response.data)
                 }
@@ -49,23 +49,37 @@ const Teams = () => {
         console.log(agents)
     }, [agents])
     return (
-        <section className="background padding">
-            <div className="container">
-                <Heading
-                    title="Our Featured Agents"
-                    subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
-                />
-                <Slider {...settings}>
-                    {agents.map(agent => (
+        <>
+            <section className="background padding">
+                <div className="container">
+                    {agents.length > 3 ? (
                         <>
-                            <Agent agent={agent} />
+                            <Heading
+                                title="Our Featured Agents"
+                                subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+                            />
+                            <Slider {...settings}>
+                                {agents.map(agent => (
+                                    <>
+                                        <Agent agent={agent} />
+                                    </>
+                                ))}
+                            </Slider>
                         </>
-                    ))}
-                </Slider>
+                    ) : (
+                        <Heading
+                            title="404 Not found"
+                            subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+                        />
+                    )}
+                </div>
 
-            </div>
-        </section>
+
+            </section>
+        </>
+
     );
 };
 

@@ -27,8 +27,9 @@ const Dashboard = () => {
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "files") {
-      if (files.length > 5) {
-        toast.error("Faqat 5 tagacha fayl yuklash mumkin.");
+      if (files.length < 3 || files.length > 5) {
+        // toast.error("Faqat 5 tagacha fayl yuklash mumkin.");
+        toast.error("File 3 dan 5 gacha bolishi kerak!.");
         return;
       }
       setHouseData({ ...houseData, files: Array.from(files) });
@@ -62,6 +63,10 @@ const Dashboard = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (houseData.files.length < 3 || houseData.files.length > 5) {
+      toast.error("Fayllar soni 3 dan 5 gacha bo'lishi kerak.");
+      return;
+    }
     if (houseData.coordinates.length < 2) {
       toast.error("Xarita joylashuvini korsatish majburiy.");
       return;
@@ -78,7 +83,7 @@ const Dashboard = () => {
     });
 
     try {
-      await axios.post("http://localhost:3001/api/dashboard", formData, {
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/dashboard`, formData, {
         headers: { 'x-auth-token': token },
       });
       toast.success("E'lon muvaffaqiyatli qo‘shildi!");
@@ -98,6 +103,7 @@ const Dashboard = () => {
       console.error("Xatolik yuz berdi:", error);
       toast.error("Xatolik yuz berdi.");
     }
+
   };
   return (
     <>
@@ -111,7 +117,7 @@ const Dashboard = () => {
 
         <form onSubmit={handleSubmit} >
           <div className="row">
-          <div className="col-lg-6 mb-3">
+            <div className="col-lg-6 mb-3">
               <label className="form-label">Uy rasmlari (1-5):</label>
               <input
                 type="file"
