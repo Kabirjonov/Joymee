@@ -118,7 +118,7 @@ import { ClientContext } from './ProfileContext';
     }, [check])
     return (
       <>
-      <ToastContainer className="position-absolute"/>
+      <ToastContainer/>
               <Basic name="Your Profile" title="Your settings" cover={img} >
               <form  onSubmit={handleSave}>
                 <div className="mb-4 m-auto profile-container" style={{ width: '120px', height: '120px', position: 'relative' }}>

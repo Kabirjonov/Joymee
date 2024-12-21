@@ -47,7 +47,7 @@ const LogIn = () => {
     };
     return (
         <>
-        <ToastContainer className="position-absolute"/>
+        <ToastContainer />
             <div className="row login_page h100 w-100">
                 <div className="col-xl-4 col-lg-6 col-sm-6 align-self-center">
                     <div className="shadow p-3 mx-5 bg-dark rounded text-light">

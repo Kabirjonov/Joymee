@@ -1,4 +1,4 @@
-  import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { nav } from "../../data/Data";
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -10,20 +10,35 @@ import axios from 'axios';
 import { toast } from "react-toastify";
 import { ClientContext } from '../../register/Profile/ProfileContext';
 import { IoPersonSharp } from "react-icons/io5";
-
 // import Swal from "sweetalert2";
 
 export default function Header() {
   const token = Cookies.get('token');
-  const {client}=useContext(ClientContext)
+  // const {client}=useContext(ClientContext)
   const navigate = useNavigate();
   const [toggleTheme, setToggleTheme] = useState(() => localStorage.getItem('theme') || 'light');
-
+  const [ImageUrl, setImageUrl] = useState('')
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', toggleTheme);
     localStorage.setItem('theme', toggleTheme);
   }, [toggleTheme]);
+  useEffect(() => {
+    const getUserImage = async () => {
+      try{
+        const getUrl = await axios.get(`${process.env.REACT_APP_API_URL}/api/profile/image`,{
+          headers: {
+            'x-auth-token': token,
+          },
+        })
+        console.log('Rasm Url Backendan Kelgan')
+        setImageUrl(getUrl.data.imageUrl)
+      }catch(err){
+        setImageUrl('')
+      }
 
+    }
+    getUserImage()
+  }, [])
   function handleLogout() {
     Cookies.remove('token');
     navigate('/signin', { replace: true });
@@ -40,34 +55,35 @@ export default function Header() {
     //   reverseButtons: true,
     // });
     // if (result.isConfirmed) {
-      try {
-        const response = await axios.delete(`${process.env.REACT_APP_API_URL}/api/profile`, {
-          headers: {
-            'x-auth-token': token,
-            'Content-Type': 'application/json',
-          },
-        });
-        if(response.status===204){
-          Cookies.remove('token');
-          navigate('/signin', { replace: true });
-          toast.info(response.data.message);
-        }
-      } catch (err) {
-        // Swal.fire(
-        //   "Xato!",
-        //   err.response && err.response.status === 422
-        //     ? err.response.data.message
-        //     : "Hisobni o‘chirishda xatolik yuz berdi.",
-        //   "error"
-        // );
-        if(err.response.status===422){
-          toast.error(`Account o\`chirishdan oldin e\`lonlarni ochiring`,);
-
-        }
-        
+    try {
+      const response = await axios.delete(`${process.env.REACT_APP_API_URL}/api/profile`, {
+        headers: {
+          'x-auth-token': token,
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.status === 204) {
+        Cookies.remove('token');
+        navigate('/signin', { replace: true });
+        toast.info(response.data.message);
       }
+    } catch (err) {
+      // Swal.fire(
+      //   "Xato!",
+      //   err.response && err.response.status === 422
+      //     ? err.response.data.message
+      //     : "Hisobni o‘chirishda xatolik yuz berdi.",
+      //   "error"
+      // );
+      if (err.response.status === 422) {
+        toast.error(`Account o\`chirishdan oldin e\`lonlarni ochiring`,);
+
+      }
+
+    }
+
     // } else {
-      // Swal.fire("Bekor qilindi", "Hisobingiz saqlab qolindi.", "info");
+    // Swal.fire("Bekor qilindi", "Hisobingiz saqlab qolindi.", "info");
     // }
   }
 
@@ -81,7 +97,7 @@ export default function Header() {
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse"style={{background:'var(--bone)'}} id="navbarSupportedContent">
+          <div className="collapse navbar-collapse" style={{ background: 'var(--bone)' }} id="navbarSupportedContent">
             <ul className="navbar-nav mx-auto mb-2 mb-lg-0 navbar__item-ul">
               {nav.map((list, index) => (
                 <li className="nav-item navbar__item-li" key={index}>
@@ -110,12 +126,10 @@ export default function Header() {
               </Dropdown> */}
               {token ? (
                 <div className="d-flex align-items-center">
-                  {client?( 
-                  <img src={client.fileUrl} alt="Profile" className="border rounded-circle" style={{ height: '50px', width: '50px', objectFit: 'cover' }} />
-
-                  ):(
-                    <IoPersonSharp className="rounded-circle border border-dark" style={{ height: '50px', width: '50px', objectFit: 'cover' }}/>
-
+                  {ImageUrl.length==0 ? (
+                    <IoPersonSharp className="rounded-circle border border-dark" style={{ height: '50px', width: '50px', objectFit: 'cover' }} />
+                  ) : (
+                    <img src={ImageUrl} className="border rounded-circle" style={{ height: '50px', width: '50px', objectFit: 'cover' }} />
                   )}
                   <Dropdown className="navbar__profile-dropdown">
                     <Dropdown.Toggle variant="link" id="profile-dropdown" aria-label="Profile">
@@ -130,7 +144,7 @@ export default function Header() {
                   </Dropdown>
                 </div>
               ) : (
-                <Link to="/signin" className="btn1" aria-label="Sign In"  onClick={() => document.querySelector('.navbar-collapse').classList.remove('show')}>
+                <Link to="/signin" className="btn1" aria-label="Sign In" onClick={() => document.querySelector('.navbar-collapse').classList.remove('show')}>
                   <i className="bi bi-box-arrow-right"></i> Sign In
                 </Link>
               )}

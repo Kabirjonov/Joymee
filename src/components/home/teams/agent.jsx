@@ -15,11 +15,7 @@ const Agent = ({ agent }) => {
                 className='text-center p-2  border '
             >
                 {fileUrl ? (
-                    <img
-                        src={fileUrl}
-                        // alt="Profile"
-                        className="rounded-circle border border-dark w-100 h-100"
-                    />
+                    <img src={fileUrl} alt="Profile" className="border rounded-circle" style={{ height: '100%', width: '100%', objectFit: 'cover' }} />
                 ) : (
                     <IoPersonSharp className="icon_forPerson rounded-circle border border-dark w-50  m-auto" />
                 )}
@@ -41,9 +37,9 @@ const Agent = ({ agent }) => {
                     <CardText>
                         {bio}
                     </CardText>
-                    <Link to={`/One`}state={{id:_id}} className='btn btn-outline-warning'>{/* bu yerda  */}
+                    {/* <Link to={`/One`}state={{id:_id}} className='btn btn-outline-warning'>
                         Sotuvchisi
-                    </Link>
+                    </Link> */}
                 </CardBody>
             </Card>
         </div>

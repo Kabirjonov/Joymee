@@ -27,7 +27,7 @@ const House = () => {
     }, [id])
     return (
         <Basic title="Information" cover={img}>
-            {!data&& (
+            {data&& (
                 <>
                 <HouseInfo data={data}/>
                 </>

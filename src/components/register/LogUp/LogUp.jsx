@@ -25,11 +25,11 @@ const SignUp = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // console.log(user)
-        // if(!validatePhoneNumber(user.phone)){
-        //     toast.error('Invalid phone number format. Please check your input.');
-        //     return;
-        // }
+        console.log(user)
+        if (!validatePhoneNumber(user.phone)) {
+            toast.error('Invalid phone number format. Please check your input.');
+            return;
+        }
         try {
             const response = await axios.post(
                 `${process.env.REACT_APP_API_URL}/api/logup`,user,
@@ -53,7 +53,7 @@ const SignUp = () => {
     };
     return (
         <div className="row w-100 login_page h00">
-            <ToastContainer className="position-absolute" />
+            <ToastContainer />
             <div className="col-6 m-auto d-grid align-items-center FormLogupPage">
                 <div className="shadow mx-5 p-3 bg-dark rounded text-light">
                     <h3 className="text-center mb-2 card__title text-warning">Sign Up</h3>

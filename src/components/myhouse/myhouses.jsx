@@ -38,7 +38,7 @@ const Myhouses = () => {
             }
         }
         getData()
-    }, [houses])
+    }, [])
     return (
         <Basic name="Contact Us" title="Get Help & Friendly Support" cover={img}>
             {houses.length === 0 ? (
