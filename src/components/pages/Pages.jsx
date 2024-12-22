@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../common/header/Header';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Updated import for Routes and Route
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'; // Updated import for Routes and Route
 import Home from '../home/Home';
 import About from '../about/About';
 import Services from '../service/Service';
