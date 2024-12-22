@@ -48,6 +48,7 @@ const SignUp = () => {
                 toast.error(response.data.message || 'User creation failed! Please try again.');
             }
         }catch (err) {
+            console.log(err)
             toast.error(err.response?.data?.message || 'Network error');
           }
     };
