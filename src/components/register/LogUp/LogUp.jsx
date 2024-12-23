@@ -208,18 +208,20 @@ const SignUp = () => {
                                 </div>
                             </div>
                             <div className="d-flex justify-content-between align-items-center mt-4">
-                                <Button type="submit" className="bg-warning text-black border-0 px-4">
+                                <button type="submit" className="btn btn-warning btn-sm">
                                     Yuborish
-                                </Button>
-                                <Link to="/signin" className="btn btn-outline-light px-4">
-                                    Tizimga kirish
+                                </button>
+                                <Link to="/signin">
+                                    <button className="btn btn-outline-light  btn-sm">
+                                        Sign in
+                                    </button>
                                 </Link>
                             </div>
                         </Form>
                     ) : (
                         <Form>
                             <FormGroup>
-                                <Label for="otp" className="mb-2 signUp">Tasdiqlash kodi</Label>
+                                <Label for="otp" className="mb-2 signUp">Sign in</Label>
                                 <Input
                                     id="otp"
                                     name="otp"
@@ -232,12 +234,12 @@ const SignUp = () => {
                                 />
                             </FormGroup>
                             <div className="d-flex justify-content-between align-items-center mt-4">
-                                <Button
+                                <button
                                     onClick={handleVerifyOtp}
-                                    className="bg-warning text-black border-0 px-4"
+                                    className='btn btn-warning btn-sm'
                                 >
                                     Tasdiqlash
-                                </Button>
+                                </button>
                             </div>
                         </Form>
                     )}

@@ -84,12 +84,11 @@ const LogIn = () => {
                                         <input type="checkbox" class="form-check-input" id="exampleCheck1"onClick={()=>setShowPass(!showPass)} />
                                         <label class="form-check-label" for="exampleCheck1">Show password</label>
                                     </div>
-                            {/* Buttons */}
                             <div className="d-flex justify-content-between align-items-center mt-4">
-                                <Button type="submit" className="bg-warning text-black border-0 px-4">
+                                <button type="submit" className="btn btn-warning btn-sm">
                                     Submit
-                                </Button>
-                                <Link to="/signup" className="btn btn-outline-light px-4">
+                                </button>
+                                <Link to="/signup" className="btn btn-outline-light btn-sm px-4">
                                     Sign Up
                                 </Link>
                             </div>
