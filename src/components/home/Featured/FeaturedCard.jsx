@@ -9,21 +9,19 @@ export default function FeaturedCard() {
       <section className="featured">
         <div className="row mtop">
           {featured.map((item, index) => (
-            <div className="col">
+            <div className="col"  data-aos="fade-right"
+            data-aos-offset={index}
+            // data-aos-easing="ease-in-sine"
+            >
               <div key={index} className="box">
                 <img src={require(`../../images/${item.cover}`)} alt="" />
                 <h4>{item.name}</h4>
                 <label>{item.total}</label>
               </div>
             </div>
-
           ))}
-
         </div>
       </section>
-
-
-
       {/* {featured.map((item, index) => (
           <div className="d-flex">
             <Card key={index} style={{ width: '15rem' }}>
@@ -37,7 +35,6 @@ export default function FeaturedCard() {
             </Card>
           </div>
         ))} */}
-
     </>
   )
 }

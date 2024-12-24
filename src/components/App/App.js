@@ -5,22 +5,28 @@ import "react-toastify/dist/ReactToastify.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ToastContainer } from "react-toastify";
+import {LanguageProvider }from'../changeLanguage/changer'
 import { ClientProvider } from "../register/Profile/ProfileContext";
-// import '@fontsource/roboto/300.css';
-// import '@fontsource/roboto/400.css';
-// import '@fontsource/roboto/500.css';
-// import '@fontsource/roboto/700.css';
-
-
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
 
 
 function App() {
-  
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Animation duration in milliseconds
+      easing: 'ease-in-out', // Easing function
+      once: true, // Whether animation should happen only once - while scrolling down
+    });
+  }, []);
   return (
-    <ClientProvider>
+    <LanguageProvider>
+     {/* // <ClientProvider> client contect ni nima uchun ishlatganimni eslolmadim */}
     <ToastContainer/>
       <Pages />
-    </ClientProvider>
+    {/* // </ClientProvider>  */}
+    </LanguageProvider>
+   
   );
 }
 export default App;

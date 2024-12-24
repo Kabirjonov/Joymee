@@ -1,4 +1,3 @@
-import h1 from '../images/h1.png'
 export const nav = [
   {
     path: "/",
@@ -31,26 +30,35 @@ export const featured = [
     cover: "h1.png",
     name: "Family House",
     total: "122 Property",
+    index:500,
   },
   {
     cover: "h2.png",
     name: "House & Villa",
     total: "155 Property",
+    index:450,
+
   },
   {
     cover: "h3.png",
     name: "Apartment",
     total: "300 Property",
+    index:400,
+
   },
   {
     cover: "h4.png",
     name: "Office & Studio",
     total: "80 Property",
+    index:350,
+
   },
   {
     cover: "h6.png",
     name: "Villa & Condo",
     total: "80 Property",
+    index:300,
+
   },
 ]
 export const list = [

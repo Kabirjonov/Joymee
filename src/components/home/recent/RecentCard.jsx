@@ -47,7 +47,7 @@ export default function RecentCard({houses}) {
           {houses.map((house) => (
             <>
               <div className='col-sm-6 col-lg-4 mb-2 '>
-                <Card className='shadow-lg border-0 p-2 mb-2 ronded' style={{...springs}}
+                <Card className='shadow-lg border-0 p-2 mb-2 ronded' data-aos="flip-down" style={{...springs}}
                 >
                   <UncontrolledCarousel
                     // items={[

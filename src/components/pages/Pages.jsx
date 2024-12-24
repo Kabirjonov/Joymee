@@ -30,8 +30,8 @@ export default function Pages() {
                 <Route path="/signin" element={<LogIn />} />
                 <Route path="/signup" element={<LogUp />} />
                 <Route path="/One" element={<House />} />
-                <Route path="/dashboard" element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />
-                <Route path="/dashboard" element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />
+                <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+                <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                 <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
                 <Route path="/myhouses" element={<ProtectedRoute><MyHouses /></ProtectedRoute>} />
                 <Route path="*" element={<Error />} />

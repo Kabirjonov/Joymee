@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { ClientContext } from '../../register/Profile/ProfileContext';
 import { IoPersonSharp } from "react-icons/io5";
 // import Swal from "sweetalert2";
+import {useLanguage}from '../../changeLanguage/changer'
 
 export default function Header() {
   const token = Cookies.get('token');
@@ -87,6 +88,10 @@ export default function Header() {
     // }
   }
 
+  
+
+  // tilni ozgartirish 
+  const {language,changeLanguage,tranlation}=useLanguage()
   return (
     <header className="position-fixed w-100" id="navbar" style={{ zIndex: '1' }}>
       <nav className="navbar navbar-expand-lg">
@@ -124,6 +129,17 @@ export default function Header() {
                   <Dropdown.Item onClick={() => setToggleTheme("dark")}>Dark Mode</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown> */}
+                 {/* <Dropdown className="navbar__mode mx-2">
+                <Dropdown.Toggle variant="" id="dropdown-basic" aria-label="Toggle theme" className='text-capitalize'>
+                  {language}
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                <Dropdown.Item onClick={() => changeLanguage('uz')}>Uz</Dropdown.Item>
+                <Dropdown.Item onClick={() => changeLanguage('eng')}>Ing</Dropdown.Item>
+                  <Dropdown.Item onClick={() => changeLanguage('ru')}>Rus</Dropdown.Item>
+            
+                </Dropdown.Menu>
+              </Dropdown> bu yerda til tanlash functionalnisi ishladi lekin mening xammasini 3 tilga ogishga xoxishim bolmadi*/}
               {token ? (
                 <div className="d-flex align-items-center">
                   {ImageUrl.length==0 ? (

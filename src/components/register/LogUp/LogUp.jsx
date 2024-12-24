@@ -56,7 +56,7 @@ const SignUp = () => {
     const handleVerifyOtp = async () => {
         try {
             const response = await axios.post(
-                `${process.env.REACT_APP_API_URL}/api/verify-otp`,
+                `${process.env.REACT_APP_API_URL}/api/verify-sms`,
                 { phone: user.phone, otp },
                 {
                     headers: { 'Content-Type': 'application/json' },
@@ -221,7 +221,6 @@ const SignUp = () => {
                     ) : (
                         <Form>
                             <FormGroup>
-                                <Label for="otp" className="mb-2 signUp">Sign in</Label>
                                 <Input
                                     id="otp"
                                     name="otp"

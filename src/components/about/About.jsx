@@ -12,7 +12,7 @@ export default function About() {
         <Back  name='About Us' title='About Us - Who We Are?' cover={img}/>
         <div className="container mt-4 mb-4 ">
           <div className="row">
-            <div className="col-sm-12 col-md-6 ">
+            <div data-aos="fade-right" className="col-sm-12 col-md-6 ">
             <Header title='Our History' subtitle='Lorem ipsum, dolor sit amet consectetur adipisicing.'/>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident fugiat aliquam vel at aspernatur ipsa unde beatae sapiente architecto accusantium?</p>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident fugiat aliquam vel at aspernatur ipsa unde beatae sapiente architecto accusantium?</p>
@@ -22,7 +22,7 @@ export default function About() {
             </div>
             </div>
             <div className="col-sm-12 col-md-6">
-              <img src={ImgRight} className='For-about__rightimg w-100 h-100' alt="" />
+              <img  data-aos="flip-down" src={ImgRight} className='For-about__rightimg w-100 h-100' alt="" />
             </div>
           </div>
         </div>
