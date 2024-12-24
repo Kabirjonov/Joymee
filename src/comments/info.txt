@@ -25,3 +25,11 @@
 
     10) pojectni kichik baglarga qaramasdan serverga yuklayverish kerak backendini xam ishlaydigan qilib database bilan
 
+
+
+
+Decabr 23 dayarli tugadi global internetda mongodb backend frontend ishlayapti 
+    1) location bosilganda ochilish
+    2) telephone noder sms jonatish va authoricatsiya
+    3) award da mavjud malumotlarni databasadan olib kelish
+    4) telephone media querini korinishini yaxshilash

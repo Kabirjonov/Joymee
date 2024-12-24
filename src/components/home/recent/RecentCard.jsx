@@ -7,6 +7,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { MdAttachMoney } from "react-icons/md";
 import axios from 'axios';
 import { FcLike } from "react-icons/fc";
+import { useSpring, animated } from '@react-spring/web'
 
 
 export default function RecentCard({houses}) {
@@ -18,6 +19,22 @@ export default function RecentCard({houses}) {
       setLiked(!liked)
     }
   }
+
+  const [springs, api] = useSpring(() => ({
+    from: { x: 0 },
+  }))
+
+  const handleClick = () => {
+    api.start({
+      from: {
+        x: 0,
+      },
+      to: {
+        x: 100,
+      },
+    })
+  }
+
   // agar sotuv uchun va aranda uchun sozlarini o`zbekchaga tarjima qilish kerak bolsa su qiymati ozgartir
   return (
     <>
@@ -30,7 +47,7 @@ export default function RecentCard({houses}) {
           {houses.map((house) => (
             <>
               <div className='col-sm-6 col-lg-4 mb-2 '>
-                <Card className='shadow-lg border-0 p-2 mb-2 ronded '
+                <Card className='shadow-lg border-0 p-2 mb-2 ronded' style={{...springs}}
                 >
                   <UncontrolledCarousel
                     // items={[
