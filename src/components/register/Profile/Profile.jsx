@@ -8,9 +8,11 @@
   import { MdDelete } from "react-icons/md";
   import { MdAddAPhoto } from "react-icons/md";
   import Basic from '../../OtherPageStyle/basic';
+  import Skeleton from "react-loading-skeleton";
 
   export default function Profile() {
     const token = Cookies.get('token')
+    const [isLoading,setIsLoading]=useState(true)
     const [check,setCheck]=useState(0)
     const [editing, setEditing] = useState(false)
     const [userData, setUserData] = useState({
@@ -78,6 +80,7 @@
     };
 
     useEffect(() => {
+      setIsLoading(true)
       const fetch = async () => {
         try {
           const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/profile`, {
@@ -92,6 +95,7 @@
             ...response.data,
             birthday: new Date(response.data.birthday).toISOString().split('T')[0], // YYYY-MM-DD formatiga o'zgartirish
           });
+          setIsLoading(false)
      
           console.log('backenda get metodi bilan oninayotgan malumot',response.data)
           setCheck(1)
@@ -110,7 +114,13 @@
               <Basic name="Your Profile" title="Your settings" cover={img} >
               <form  onSubmit={handleSave}>
                 <div className="mb-4 m-auto profile-container" style={{ width: '120px', height: '120px', position: 'relative' }}>
-                  {userData.fileUrl ? (
+                  {isLoading?(
+                    <>
+                     <Skeleton circle={true} height='100%' width="100%" />
+                    </>
+                  ):(
+                    <>
+                           {userData.fileUrl ? (
                     <img
                       src={userData.fileUrl}
                       // alt="Profile"
@@ -119,6 +129,9 @@
                   ) : (
                     <IoPersonSharp className="icon_forPerson rounded-circle border border-dark w-100 h-100" />
                   )}
+                    </>
+                  )}
+           
                 
 
                   {editing && (
@@ -148,7 +161,10 @@
                 <div className="row">
                   <div className="mb-3 col-lg-6">
                     <label className="form-label">First Name</label>
-                    <input
+                    {isLoading?(
+                         <Skeleton height={40} width="100%" />
+                    ):(
+                      <input
                       type="text"
                       className="form-control"
                       name='firstName'
@@ -156,9 +172,14 @@
                       onChange={handleChange}
                       disabled={!editing}
                     />
+                    )}
+                 
                   </div>
                   <div className="mb-3 col-lg-6">
                     <label className="form-label">Last Name</label>
+                    {isLoading?(
+                         <Skeleton height={40} width="100%" />
+                    ):(
                     <input
                       type="text"
                       className="form-control"
@@ -169,27 +190,37 @@
                       // onChange={(e) => setUserData(...e.target.value)}
                       disabled={!editing}
                     />
+                    )}
                   </div>
                   <div className="mb-3 col-lg-6">
                     <label className="form-label">Email</label>
+                    {isLoading?(
+                         <Skeleton height={40} width="100%" />
+                    ):(
                     <input type="email" className="form-control"
                       name='email'
                       value={userData.email}
                       disabled />
+                    )}
                   </div>
                   <div className="mb-3 col-lg-6">
                     <label className="form-label">Phone Number</label>
+                    {isLoading?(
+                         <Skeleton height={40} width="100%" />
+                    ):(
                     <input
                       type="text"
                       className="form-control"
                       name='phone'
                       value={userData.phone}
-
                       disabled
-                    />
+                    />)}
                   </div>
                   <div className="mb-3 col-lg-6">
                     <label className="form-label">Date of Birth</label>
+                    {isLoading?(
+                         <Skeleton height={40} width="100%" />
+                    ):(
                     <input
                       type="date"
                       className="form-control"
@@ -197,35 +228,38 @@
                       name='birthday'
                       onChange={handleChange}
 
-                      // onChange={(e) => setUserData(...e.target.value)}
                       disabled={!editing}
-                    />
+                    />)}
                   </div>
                   <div className="mb-3 col-lg-6">
                     <label className="form-label">Gender</label>
+                    {isLoading?(
+                         <Skeleton height={40} width="100%" />
+                    ):(
                     <select
                       className="form-select"
                       value={userData.gender}
                       name='gender'
-                      // onChange={(e) => setUserData(...e.target.value)}
                       onChange={handleChange}
                       disabled={!editing}
                     >
                       <option value="Man">Man</option>
                       <option value="Woman">Woman</option>
-                    </select>
+                    </select>)}
                   </div>
                   <div className="mb-3">
                     <label className="form-label">Bio</label>
+                    {isLoading?(
+                         <Skeleton height={100} width="100%" />
+                    ):(
                     <textarea
                       className="form-control"
                       name='bio'
                       value={userData.bio}
-                      // onChange={(e) => setUserData(...e.target.value)}
                       onChange={handleChange}
                       disabled={!editing}
                       rows="3"
-                    ></textarea>
+                    ></textarea>)}
                   </div>
                   <div className="d-flex justify-content-between">
                     <button
@@ -239,8 +273,9 @@
                       <button
                         type="submit"
                         className="btn btn-success"
+                        disabled={isLoading}
                       >
-                        Save
+                        {isLoading?"Saveing...":"Save"}
                       </button>
                     )}
                   </div>

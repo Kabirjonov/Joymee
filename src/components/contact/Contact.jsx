@@ -10,6 +10,7 @@ import Basic from '../OtherPageStyle/basic';
 import Heading from '../common/Heading';
 
 export default function Contact() {
+  const [isLoading,setIsLoading]=useState(false)
   const [formData, setFormData] = useState({
     name: '',
     lastname: '',
@@ -29,6 +30,7 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true)
     emailjs
       .sendForm(
         process.env.REACT_APP_EMAIL_SERVICE_ID, // Correct variable for service ID
@@ -41,6 +43,7 @@ export default function Contact() {
           console.log('Email sent successfully:', result.text);
           toast.success('Message sent successfully!');
           setFormData({ name: '', lastname: '', email: '', message: '' }); // Clear form
+          setIsLoading(false)
         },
         (error) => {
           console.error('Error sending email:', error.text);
@@ -106,7 +109,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <button className="btn btn-warning">Submit Request</button>
+          <button className="btn btn-warning"disabled={isLoading}>{isLoading?"Sending...":"Send"}</button>
         </form>
       </Basic>
     </>

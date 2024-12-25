@@ -11,6 +11,7 @@ import Basic from '../OtherPageStyle/basic';
 const Dashboard = () => {
   const token = Cookies.get('token');
   const [userLocation, setUserLocation] = useState(null);
+  const [isLoading,setIsLoading]=useState(false)
   const [houseData, setHouseData] = useState({
     files: [],
     price: "",
@@ -63,12 +64,15 @@ const Dashboard = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true)
     if (houseData.files.length < 3 || houseData.files.length > 5) {
       toast.error("Fayllar soni 3 dan 5 gacha bo'lishi kerak.");
+      setIsLoading(false)
       return;
     }
     if (houseData.coordinates.length < 2) {
       toast.error("Xarita joylashuvini korsatish majburiy.");
+      setIsLoading(false)
       return;
     }
     const formData = new FormData();
@@ -99,7 +103,9 @@ const Dashboard = () => {
         coordinates: [],
         comment: "",
       });
+      setIsLoading(false)
     } catch (error) {
+      setIsLoading(false)
       console.error("Xatolik yuz berdi:", error);
       toast.error("Xatolik yuz berdi.");
     }
@@ -276,8 +282,8 @@ const Dashboard = () => {
 
           </div>
 
-          <button type="submit" className="btn btn-success">
-            Saqlash
+          <button type="submit" className="btn btn-success" disabled={isLoading}>
+            {isLoading?"Uploading...":"Uploading"}
           </button>
         </form>
       </Basic>

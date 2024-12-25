@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import {LanguageProvider }from'../changeLanguage/changer'
 import AOS from 'aos';
 import 'aos/dist/aos.css'; 
+import 'react-loading-skeleton/dist/skeleton.css';
 
 
 function App() {
