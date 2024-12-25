@@ -8,14 +8,14 @@ import { MdAttachMoney } from "react-icons/md";
 import axios from 'axios';
 import { FcLike } from "react-icons/fc";
 import { useSpring, animated } from '@react-spring/web'
-
+import Skeleton from 'react-loading-skeleton';
 
 export default function RecentCard({houses}) {
   const [liked,setLiked]=useState(false)
-  if(!houses||houses.fileUrls){
-    return <div>Loading</div>// bu yerda lezy loading ishlatish kerak
+  if(!houses){
+    return <div className='mt-5'><Skeleton height={100}/></div>// bu yerda lezy loading ishlatish kerak
   }
-  console.log(houses)
+
   const handleLike=async(id)=>{
     if(!liked){
       // await axios.put(`${process.env.REACT_APP_API_URL}/api/blog/${id}`)

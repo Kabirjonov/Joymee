@@ -44,16 +44,16 @@ export default function Header() {
   }
 
   async function DelAccount() {
-    // const result = await Swal.fire({
-    //   title: "Hisobni o‘chirish",
-    //   text: "Haqiqatan ham hisobingizni o‘chirmoqchimisiz?",
-    //   icon: "warning",
-    //   showCancelButton: true,
-    //   confirmButtonText: "Ha, o‘chir!",
-    //   cancelButtonText: "Yo‘q, bekor qil!",
-    //   reverseButtons: true,
-    // });
-    // if (result.isConfirmed) {
+    const result = await Swal.fire({
+      title: "Hisobni o‘chirish",
+      text: "Haqiqatan ham hisobingizni o‘chirmoqchimisiz?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Ha, o‘chir!",
+      cancelButtonText: "Yo‘q, bekor qil!",
+      reverseButtons: true,
+    });
+    if (result.isConfirmed) {
     try {
       const response = await axios.delete(`${process.env.REACT_APP_API_URL}/api/profile`, {
         headers: {
@@ -66,14 +66,15 @@ export default function Header() {
         navigate('/signin', { replace: true });
         toast.info(response.data.message);
       }
+      
     } catch (err) {
-      // Swal.fire(
-      //   "Xato!",
-      //   err.response && err.response.status === 422
-      //     ? err.response.data.message
-      //     : "Hisobni o‘chirishda xatolik yuz berdi.",
-      //   "error"
-      // );
+      Swal.fire(
+        "Xato!",
+        err.response && err.response.status === 422
+          ? err.response.data.message
+          : "Hisobni o‘chirishda xatolik yuz berdi.",
+        "error"
+      );
       if (err.response.status === 422) {
         toast.error(`Account o\`chirishdan oldin e\`lonlarni ochiring`,);
 
@@ -81,9 +82,9 @@ export default function Header() {
 
     }
 
-    // } else {
-    // Swal.fire("Bekor qilindi", "Hisobingiz saqlab qolindi.", "info");
-    // }
+    } else {
+    Swal.fire("Bekor qilindi", "Hisobingiz saqlab qolindi.", "info");
+    }
   }
 
   
@@ -137,7 +138,8 @@ export default function Header() {
                   <Dropdown.Item onClick={() => changeLanguage('ru')}>Rus</Dropdown.Item>
             
                 </Dropdown.Menu>
-              </Dropdown> bu yerda til tanlash functionalnisi ishladi lekin mening xammasini 3 tilga ogishga xoxishim bolmadi*/}
+              </Dropdown> */}
+              {/* bu yerda til tanlash functionalnisi ishladi lekin mening xammasini 3 tilga ogishga xoxishim bolmadi */}
               {token ? (
                 <div className="d-flex align-items-center">
                   {ImageUrl.length==0 ? (

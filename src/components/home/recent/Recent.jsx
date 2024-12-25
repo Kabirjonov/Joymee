@@ -40,6 +40,10 @@ export default function Recent() {
       })
         setHouses(response.data.houses)
         setTotalPages(response.data.totalPage)
+        console.log(houses)
+        const house = houses[0]
+        console.log(house)
+        // const items = house.
     }
     catch (err) {
       setHouses([])
