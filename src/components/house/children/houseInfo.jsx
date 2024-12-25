@@ -7,6 +7,9 @@ import { IoPersonSharp } from "react-icons/io5";
 import Heading from '../../common/Heading';
 
 const HouseInfo = ({ data }) => {
+    if (!data || !data.coordinates) {
+        return <div>Loading...</div>; // Display a loading message or placeholder
+    }
     const { author, fileUrls } = data || {};
     return (
         <div className="list-group list-group-flush">
@@ -31,6 +34,14 @@ const HouseInfo = ({ data }) => {
                     </div>
                     <div className="col-lg-6 col-sm-12">
                         <ul className="list-group list-group-flush">
+                            <li className="list-group-item d-flex">Manzili:<strong><a rel="noopener noreferrer"
+                                target="_blank"
+                                href={`https://yandex.com/maps/?ll=${data.coordinates[1]},${data.coordinates[0]}&z=18&pt=${data.coordinates[1]},${data.coordinates[0]}`}>
+                                <i class="bi bi-geo-alt-fill text-warning mb-1"></i>
+                                {' ' + data.viloyat + ' ' + data.shaxar + ' ' + data.tuman}
+                            </a>
+                            </strong>
+                            </li>
                             <li className="list-group-item d-flex">Narxi:<strong>{data.price}</strong><MdAttachMoney /></li>
                             <li className="list-group-item d-flex">Uy turi:<strong>{data.tur}</strong></li>
                             <li className="list-group-item d-flex">Uy maydoni:<strong>{data.area} km²</strong></li>

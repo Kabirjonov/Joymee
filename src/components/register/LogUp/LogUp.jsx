@@ -42,9 +42,15 @@ const SignUp = () => {
                     withCredentials: true,
                 }
             );
+            const token = response.headers['x-auth-token'];
             if (response.status === 200) {
-                toast.success('Telefoningizga kod yuborildi.');
-                setIsOTPStage(true); // OTP bosqichiga o‘tadi
+                // toast.success('Telefoningizga kod yuborildi.');
+                // setIsOTPStage(true); // OTP bosqichiga o‘tadi
+                Cookies.set('token', token, { expires: 7 });
+                setTimeout(() => navigate('/dashboard'), 2000);
+                toast.success('Ro‘yxatdan o‘tish muvaffaqiyatli tugallandi! Yo‘naltirilmoqda...');
+
+
             } else {
                 toast.error(response.data.message || 'Ro‘yxatdan o‘tishda xatolik yuz berdi!');
             }

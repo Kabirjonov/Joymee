@@ -6,7 +6,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ToastContainer } from "react-toastify";
 import {LanguageProvider }from'../changeLanguage/changer'
-import { ClientProvider } from "../register/Profile/ProfileContext";
 import AOS from 'aos';
 import 'aos/dist/aos.css'; 
 
@@ -21,10 +20,8 @@ function App() {
   }, []);
   return (
     <LanguageProvider>
-     {/* // <ClientProvider> client contect ni nima uchun ishlatganimni eslolmadim */}
     <ToastContainer/>
       <Pages />
-    {/* // </ClientProvider>  */}
     </LanguageProvider>
    
   );

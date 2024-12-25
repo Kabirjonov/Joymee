@@ -1,4 +1,4 @@
-  import React, { useState, useEffect ,useContext} from 'react';
+  import React, { useState, useEffect } from 'react';
   import img from '../../images/room.jpg';
   import { IoPersonSharp } from "react-icons/io5";
   import axios from 'axios';
@@ -8,10 +8,8 @@
   import { MdDelete } from "react-icons/md";
   import { MdAddAPhoto } from "react-icons/md";
   import Basic from '../../OtherPageStyle/basic';
-import { ClientContext } from './ProfileContext';
 
   export default function Profile() {
-    const {setClient}=useContext(ClientContext)
     const token = Cookies.get('token')
     const [check,setCheck]=useState(0)
     const [editing, setEditing] = useState(false)
@@ -71,11 +69,7 @@ import { ClientContext } from './ProfileContext';
           // ...prevState,
           ...updatedUser,
         });
-        setClient({
-          ...updatedUser,
-        })
-
-        toast.success(response.data.message || 'Upload is successfully');
+          toast.success(response.data.message || 'Upload is successfully');
         setEditing(false)
       } catch (err) {
         console.error('Error uploading file:', err);
@@ -98,10 +92,7 @@ import { ClientContext } from './ProfileContext';
             ...response.data,
             birthday: new Date(response.data.birthday).toISOString().split('T')[0], // YYYY-MM-DD formatiga o'zgartirish
           });
-          setClient({
-            ...response.data,
-            birthday: new Date(response.data.birthday).toISOString().split('T')[0], 
-          })
+     
           console.log('backenda get metodi bilan oninayotgan malumot',response.data)
           setCheck(1)
         } catch (err) {
@@ -111,10 +102,7 @@ import { ClientContext } from './ProfileContext';
       fetch()
     }, [token])
     useEffect(() => {
-      // console.log(userData)
       console.log('olingan malumotni userDataga yozilishi',userData)
-
-      // console.log(userData.fileUrl)
     }, [check])
     return (
       <>

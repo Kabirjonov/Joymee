@@ -12,7 +12,10 @@ import { useSpring, animated } from '@react-spring/web'
 
 export default function RecentCard({houses}) {
   const [liked,setLiked]=useState(false)
-
+  if(!houses||houses.fileUrls){
+    return <div>Loading</div>// bu yerda lezy loading ishlatish kerak
+  }
+  console.log(houses)
   const handleLike=async(id)=>{
     if(!liked){
       // await axios.put(`${process.env.REACT_APP_API_URL}/api/blog/${id}`)
@@ -93,15 +96,17 @@ export default function RecentCard({houses}) {
                     <div className="d-flex justify-content-start align-items-center">
                       <i class="bi bi-geo-alt-fill text-warning mb-1"></i>
                       <CardSubtitle
-                        className="font-weight-light " style={{ color: "var(--p)", marginLeft: "5px" }}
-                        tag="h6"
+                        className="font-weight-light " style={{ color: "var(--p)", marginLeft: "5px"}}
+                        tag="a"
+                        rel="noopener noreferrer" 
+                        target="_blank" 
+                        href={`https://yandex.com/maps/?ll=${house.coordinates[1]},${house.coordinates[0]}&z=18&pt=${house.coordinates[1]},${house.coordinates[0]}`}
                       >
                         {house.viloyat + " " + house.shaxar + " " + house.tuman}
-                        {/* bu yerga xam locationi bosganda yandex locationga olib otish kerak */}
                       </CardSubtitle>
                     </div>
                     <CardText>
-                      {house.comment}{/*  hozircha xunuk koringani uchun ochirib qoydim */}
+                      {house.comment}
                       {/* Some quick example text to build on the card title and make up the bulk of the card‘s content. */}
                     </CardText>
                     <div className="d-flex justify-content-between align-items-center">

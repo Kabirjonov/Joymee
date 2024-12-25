@@ -8,14 +8,12 @@ import Cookies from 'js-cookie';
 import img from '../../images/room.jpg';
 import axios from 'axios';
 import { toast } from "react-toastify";
-import { ClientContext } from '../../register/Profile/ProfileContext';
 import { IoPersonSharp } from "react-icons/io5";
 // import Swal from "sweetalert2";
 import {useLanguage}from '../../changeLanguage/changer'
 
 export default function Header() {
   const token = Cookies.get('token');
-  // const {client}=useContext(ClientContext)
   const navigate = useNavigate();
   const [toggleTheme, setToggleTheme] = useState(() => localStorage.getItem('theme') || 'light');
   const [ImageUrl, setImageUrl] = useState('')
