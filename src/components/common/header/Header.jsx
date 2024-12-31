@@ -9,8 +9,9 @@ import img from '../../images/room.jpg';
 import axios from 'axios';
 import { toast } from "react-toastify";
 import { IoPersonSharp } from "react-icons/io5";
-// import Swal from "sweetalert2";
+import Swal from "sweetalert2";
 import {useLanguage}from '../../changeLanguage/changer'
+import { FaShoppingCart } from "react-icons/fa";
 
 export default function Header() {
   const token = Cookies.get('token');
@@ -87,10 +88,10 @@ export default function Header() {
     }
   }
 
-  
+
 
   // tilni ozgartirish 
-  const {language,changeLanguage,tranlation}=useLanguage()
+  const {language,changeLanguage,tranlation,cart}=useLanguage()
   return (
     <header className="position-fixed w-100" id="navbar" style={{ zIndex: '1' }}>
       <nav className="navbar navbar-expand-lg">
@@ -110,6 +111,13 @@ export default function Header() {
                   </Link>
                 </li>
               ))}
+                       {cart&&(
+                        <li className="nav-item navbar__item-li">
+                        <Link to="cart" onClick={() => document.querySelector('.navbar-collapse').classList.remove('show')}>
+                          Cart
+                        </Link>
+                      </li>
+              )}
               {token && (
                 <li className="nav-item navbar__item-li">
                   <Link to="dashboard" onClick={() => document.querySelector('.navbar-collapse').classList.remove('show')}>
@@ -117,6 +125,7 @@ export default function Header() {
                   </Link>
                 </li>
               )}
+     
             </ul>
             <div className="navbar__login-page d-flex justify-content-center align-items-center ">
               {/* <Dropdown className="navbar__mode mx-2">
@@ -128,7 +137,7 @@ export default function Header() {
                   <Dropdown.Item onClick={() => setToggleTheme("dark")}>Dark Mode</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown> */}
-                 {/* <Dropdown className="navbar__mode mx-2">
+                 <Dropdown className="navbar__mode mx-2">
                 <Dropdown.Toggle variant="" id="dropdown-basic" aria-label="Toggle theme" className='text-capitalize'>
                   {language}
                 </Dropdown.Toggle>
@@ -138,7 +147,7 @@ export default function Header() {
                   <Dropdown.Item onClick={() => changeLanguage('ru')}>Rus</Dropdown.Item>
             
                 </Dropdown.Menu>
-              </Dropdown> */}
+              </Dropdown>
               {/* bu yerda til tanlash functionalnisi ishladi lekin mening xammasini 3 tilga ogishga xoxishim bolmadi */}
               {token ? (
                 <div className="d-flex align-items-center">

@@ -3,13 +3,11 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import img from '../images/room.jpg'
 import Basic from '../OtherPageStyle/basic'
 import axios from 'axios';
-import { toast } from 'react-toastify';
-import User from './children/userInfo';
 import HouseInfo from './children/houseInfo'
 
 const House = () => {
     const navigate = useNavigate();
-    const [data, setData] = useState({})
+    const [house, setHouse] = useState({})
     const location = useLocation()
     const { id } = location.state || {}
     useEffect(() => {
@@ -17,7 +15,7 @@ const House = () => {
         const getData = async () => {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/info/${id}`);
-                if (response.status == 200) setData(response.data)
+                if (response.status == 200) setHouse(response.data)
             }
             catch (err) {
                 toast.error(err.response.data.message)
@@ -27,11 +25,7 @@ const House = () => {
     }, [id])
     return (
         <Basic title="Information" cover={img}>
-            {data&& (
-                <>
-                <HouseInfo data={data}/>
-                </>
-            )}
+                <HouseInfo house={house}/>
         </Basic>
     );
 }

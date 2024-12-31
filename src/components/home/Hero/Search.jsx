@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 
-const Search = ({onSearch}) => {
+const Search = ({onSearch,loading}) => {
   const [location,setLocation]=useState('')
   const [type,setType]=useState('');
   const [price,setPrive]=useState('')
@@ -38,7 +38,7 @@ const Search = ({onSearch}) => {
         </div>
         <div className='col-lg-3 col-md-4 col-md-6 d-flex justify-content-evenly align-items-center form-group'>
           <h5 className='h5'>Advance Filter</h5>
-          <button type='submit' className='btn btn-warning'><i className='bi bi-search'></i></button>
+          <button type='submit' className='btn btn-warning' disabled={loading}>{loading?'...':<i className='bi bi-search'></i>}</button>
         </div>
       </div>
     </form>

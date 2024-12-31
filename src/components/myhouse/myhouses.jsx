@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import img from '../images/room.jpg'
 import { toast } from 'react-toastify'
-import {UncontrolledCarousel}from 'reactstrap'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { IoLocationSharp } from "react-icons/io5";
 import { MdAttachMoney, MdDelete } from "react-icons/md";
 import { FaImage } from "react-icons/fa6";
-import { Carousel } from 'react-bootstrap';
 import './myhouse.css'
 import Basic from '../OtherPageStyle/basic';
+import Carousel from '../home/carousel/carousel'
 const Myhouses = () => {
     const token = Cookies.get('token')
     const [houses, setHouses] = useState([])
@@ -60,60 +59,14 @@ const Myhouses = () => {
                                 <MdDelete onClick={() => deleteItem(house._id)} className='position-absolute deleteItem' />
                                 <div className='mb-3 row' key={house._id}>
                                     <div className='d-flex center align-items-center  col-lg-6 col-sm-12 '>
-                                             {/* <UncontrolledCarousel
-                                                            items={[
-                                                              {
-                                                                altText: 'Slide 1',
-                                                                key: 1,
-                                                                src: 'https://picsum.photos/id/123/1200/600'
-                                                              },
-                                                              {
-                                                                altText: 'Slide 2',
-                                                                key: 2,
-                                                                src: 'https://picsum.photos/id/456/1200/600'
-                                                              },
-                                                              {
-                                                                altText: 'Slide 3',
-                                                                key: 3,
-                                                                src: 'https://picsum.photos/id/678/1200/600'
-                                                              }
-                                                            ]}// bu yerda odiy rasm ishlatishni orniga backendan kelgan url ishlatish kerak
-                                                
-                                                          /> */}
                                          {house.fileUrls && house.fileUrls.length > 0 ? (
-                                            <UncontrolledCarousel
-                                            items={[
-                                                {
-                                                  altText: 'Slide 1',
-                                                  key: 1,
-                                                  src: 'https://picsum.photos/id/123/1200/600'
-                                                },
-                                                {
-                                                  altText: 'Slide 2',
-                                                  key: 2,
-                                                  src: 'https://picsum.photos/id/456/1200/600'
-                                                },
-                                                {
-                                                  altText: 'Slide 3',
-                                                  key: 3,
-                                                  src: 'https://picsum.photos/id/678/1200/600'
-                                                }
-                                              ]}
-                                        //     items={house.fileUrls.map((item,id) => ({
-                                        //         altText: `Slide ${id+1}`,
-                                        //         key: id,
-                                        //         src: item
-                                        //  }))}
-                                            >
-                  
-                                            </UncontrolledCarousel>
+                                         <Carousel house={house}/>
                                         ) : (
-                                            <FaImage className="icon_forPerson h-100 m-auto" />
+                                            <FaImage className="icon_forPerson h-100 m-auto"/>
                                         )} 
                                     </div>
                                     <div className='d-flex justify-content-start col-lg-6  col-sm-12'>
                                         <ul className='list-group list-group-flush d-flex justify-content-center'>
-                                            {/* bu yerda manzilni bosa yandex mapda coordinata lar berilgan location chiqish kerak */}
                                             <li className="list-group-item d-flex">Manzili:<strong><a rel="noopener noreferrer"
                                                 target="_blank"
                                                 href={`https://yandex.com/maps/?ll=${house.coordinates[1]},${house.coordinates[0]}&z=18&pt=${house.coordinates[1]},${house.coordinates[0]}`}>

@@ -13,6 +13,7 @@ import LogUp from '../register/LogUp/LogUp';
 import ProtectedRoute from '../dashboard/ProtectedRoute'
 import Dashboard from '../dashboard/DashboardPage';
 import Profile from '../register/Profile/Profile'
+import Cart from '../cart/cart'
 import Error from '../ErrorPage/Error';
 import { ToastContainer } from "react-toastify";
 
@@ -30,6 +31,7 @@ export default function Pages() {
                 <Route path="/signin" element={<LogIn />} />
                 <Route path="/signup" element={<LogUp />} />
                 <Route path="/One" element={<House />} />
+                <Route path="/cart" element={<Cart />} />
                 <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                 <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                 <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />

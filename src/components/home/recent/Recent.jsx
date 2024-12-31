@@ -12,6 +12,7 @@ import axios from 'axios'
 export default function Recent() {
   const [houses, setHouses] = useState([])
   const [page, setPage] = useState(1)
+  const [loading,setLoading]=useState(false)
   const [totalPages, setTotalPages] = useState(1)
   const getData = async (page) => {
     try {
@@ -30,6 +31,7 @@ export default function Recent() {
   }
 
   const handleSearch = async (data) => {
+    setLoading(true)
     console.log(data)
     try {
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/search/${page}`, {
@@ -43,10 +45,12 @@ export default function Recent() {
         console.log(houses)
         const house = houses[0]
         console.log(house)
+        setLoading(false)
         // const items = house.
     }
     catch (err) {
       setHouses([])
+      setLoading(false)
         setPage(0)
         setTotalPages(0)
     }
@@ -61,7 +65,7 @@ export default function Recent() {
             Ut enim ad minim veniam."/>
           <div className="mb-5">
           </div>
-          <Search onSearch={handleSearch} />
+          <Search onSearch={handleSearch} loading={loading} />
           {/* <Search1/> */}
           <RecentCard houses={houses} />
           {houses.length > 0 && page > 0 && (
