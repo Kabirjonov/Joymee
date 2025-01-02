@@ -24,6 +24,7 @@ function App() {
     <ToastContainer/>
       <Pages />
     </LanguageProvider>
+ 
    
   );
 }

@@ -3,35 +3,34 @@ import { UncontrolledCarousel } from 'reactstrap';
 import { BsBookmark } from "react-icons/bs";
 import { BsBookmarkFill } from "react-icons/bs";
 import './style.css';
-import {useLanguage} from '../../changeLanguage/changer'
+import { useLanguage } from '../../changeLanguage/changer';
 import Skeleton from 'react-loading-skeleton';
 
 const Carousel = ({ house, id }) => {
   const [checked, setChecked] = useState(false);
-  const {setCart}=useLanguage()
-
+  const { setCart } = useLanguage();
+console.log(house)
   useEffect(() => {
     const storedIds = JSON.parse(localStorage.getItem('saveIds')) || [];
-    
     if (storedIds.includes(id)) {
       setChecked(true);
     }
-  }, [id,setCart]);
+  }, [id, setCart]);
 
   useEffect(() => {
     const storedIds = JSON.parse(localStorage.getItem('saveIds')) || [];
-    setCart(storedIds.length>0)
+    setCart(storedIds.length > 0);
     if (checked) {
       if (!storedIds.includes(id)) {
         const updatedIds = [...storedIds, id];
         localStorage.setItem('saveIds', JSON.stringify(updatedIds));
-        setCart(true)
+        setCart(true);
       }
     } else {
       if (storedIds.includes(id)) {
         const updatedIds = storedIds.filter(i => i !== id);
         localStorage.setItem('saveIds', JSON.stringify(updatedIds));
-        setCart(updatedIds.length>0)
+        setCart(updatedIds.length > 0);
       }
     }
   }, [checked, id]);
@@ -39,33 +38,24 @@ const Carousel = ({ house, id }) => {
   if (!house) {
     return <div className='mt-5'><Skeleton height={100} /></div>;
   }
+
+  // Map fileNames array to create carousel items
+  const carouselItems = house.fileUrls.map((fileUrl, index) => ({
+    src: fileUrl, // Assuming fileName is a full URL
+    altText: `Slide ${index + 1}`,
+    key: index + 1
+  }));
+
   return (
     <>
-      <UncontrolledCarousel
-        items={[
-          {
-            altText: 'Slide 1',
-            key: 1,
-            src: 'http://localhost:3001/images/1735679129518-icon512.png'
-          },
-          {
-            altText: 'Slide 2',
-            key: 2,
-            src: 'http://localhost:3001/images/1735679129519-pp_wide.png'
-          },
-          {
-            altText: 'Slide 3',
-            key: 3,
-            src: 'https://picsum.photos/id/678/1200/600'
-          }
-        ]}
-  //       items={house.fileUrls.map((item,id) => ({
-  //         altText: `Slide ${id+1}`,
-  //         key: id,
-  //         src: item
-  //  }))}
-        className='position-relative'
-      />
+      {carouselItems.length > 0 ? (
+        <UncontrolledCarousel
+          items={carouselItems}
+          className='position-relative'
+        />
+      ) : (
+        <div>No images available</div>
+      )}
       <div className="CardSaveStyle" onClick={() => setChecked(!checked)}>
         {checked 
           ? <BsBookmarkFill className='text-light w-100 h-100' /> 
