@@ -43,19 +43,17 @@ const SignUp = () => {
                 }
             );
             const token = response.headers['x-auth-token'];
-            if (response.status === 200) {
+            if (response.status === 200&&token) {
                 // toast.success('Telefoningizga kod yuborildi.');
                 // setIsOTPStage(true); // OTP bosqichiga o‘tadi
                 Cookies.set('token', token, { expires: 7 });
                 setTimeout(() => navigate('/dashboard'), 2000);
                 toast.success('Ro‘yxatdan o‘tish muvaffaqiyatli tugallandi! Yo‘naltirilmoqda...');
-
-
-            } else {
-                toast.error(response.data.message || 'Ro‘yxatdan o‘tishda xatolik yuz berdi!');
-            }
+                } 
+                if(response.status===208)toast.error(response.data.message||"Email or Phone number is already created")
         } catch (err) {
-            toast.error(err.response?.data?.message || 'Tarmoq xatosi.');
+            toast.error(err.response.data || 'Tarmoq xatosi.');
+            console.log(err)
         }
     };
 

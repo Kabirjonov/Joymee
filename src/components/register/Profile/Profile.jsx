@@ -57,7 +57,6 @@
         if (userData.file) {
             formData.append('file', userData.file);
         }
-        console.log("Backendga Janatilyotgan malumotlar: ", formData)
         // So‘rov yuborish
         const response = await axios.put(`${process.env.REACT_APP_API_URL}/api/profile`, formData, {
           headers: {
@@ -89,15 +88,11 @@
               'Content-Type': 'application/json',
             },
           })
-          // console.log('userData Data befor changing',userData)
-
           setUserData({
             ...response.data,
             birthday: new Date(response.data.birthday).toISOString().split('T')[0], // YYYY-MM-DD formatiga o'zgartirish
           });
           setIsLoading(false)
-     
-          console.log('backenda get metodi bilan oninayotgan malumot',response.data)
           setCheck(1)
         } catch (err) {
           toast.error(err.message)
@@ -105,9 +100,6 @@
       }
       fetch()
     }, [token])
-    useEffect(() => {
-      console.log('olingan malumotni userDataga yozilishi',userData)
-    }, [check])
     return (
       <>
       <ToastContainer/>

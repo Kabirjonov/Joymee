@@ -32,7 +32,6 @@ export default function Recent() {
 
   const handleSearch = async (data) => {
     setLoading(true)
-    console.log(data)
     try {
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/search/${page}`, {
         params: data,
@@ -42,9 +41,6 @@ export default function Recent() {
       })
         setHouses(response.data.houses)
         setTotalPages(response.data.totalPage)
-        console.log(houses)
-        const house = houses[0]
-        console.log(house)
         setLoading(false)
         // const items = house.
     }

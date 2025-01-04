@@ -40,7 +40,6 @@ export default function Contact() {
       )
       .then(
         (result) => {
-          console.log('Email sent successfully:', result.text);
           toast.success('Message sent successfully!');
           setFormData({ name: '', lastname: '', email: '', message: '' }); // Clear form
           setIsLoading(false)

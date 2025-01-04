@@ -4,6 +4,7 @@ import h1 from '../../images/h1.png'
 import { featured } from '../../data/Data';
 import { Row, Col } from 'reactstrap'
 export default function FeaturedCard() {
+  console.log("Featured: ",featured)
   return (
     <>
       <section className="featured">
@@ -13,6 +14,7 @@ export default function FeaturedCard() {
             data-aos-offset={index}
             // data-aos-easing="ease-in-sine"
             >
+
               <div key={index} className="box">
                 <img src={require(`../../images/${item.cover}`)} alt="" />
                 <h4>{item.name}</h4>

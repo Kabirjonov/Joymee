@@ -9,7 +9,6 @@ import Skeleton from 'react-loading-skeleton';
 const Carousel = ({ house, id }) => {
   const [checked, setChecked] = useState(false);
   const { setCart } = useLanguage();
-console.log(house)
   useEffect(() => {
     const storedIds = JSON.parse(localStorage.getItem('saveIds')) || [];
     if (storedIds.includes(id)) {

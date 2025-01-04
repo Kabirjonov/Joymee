@@ -30,7 +30,6 @@ export default function Header() {
             'x-auth-token': token,
           },
         })
-        console.log('Rasm Url Backendan Kelgan')
         setImageUrl(getUrl.data.imageUrl)
       }catch(err){
         setImageUrl('')
@@ -67,7 +66,6 @@ export default function Header() {
         navigate('/signin', { replace: true });
         toast.info(response.data.message);
       }
-      
     } catch (err) {
       Swal.fire(
         "Xato!",

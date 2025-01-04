@@ -45,9 +45,6 @@ const Teams = () => {
             },
         ],
     };
-    useEffect(() => {
-        console.log(agents)
-    }, [agents])
     return (
         <>
             <section className="background padding">
