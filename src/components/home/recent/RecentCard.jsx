@@ -8,6 +8,9 @@ import { useSpring, animated } from '@react-spring/web';
 import Skeleton from 'react-loading-skeleton';
 import Carousel from '../carousel/carousel';
 import { FaHeart } from "react-icons/fa6";
+import { IoPersonSharp } from "react-icons/io5";
+
+
 
 export default function RecentCard({ houses }) {
   const [likedStates, setLikedStates] = useState({});
@@ -71,11 +74,11 @@ export default function RecentCard({ houses }) {
       ) : (
         <div className="row mtop">
           {houses.map((house) => (
-            <div className='col-sm-6 col-lg-4 mb-2 ' key={house._id}>
-              <Card className='shadow-lg border-0 p-2 mb-2 ronded' data-aos="flip-down" style={{ ...springs }}>
-                <Carousel house={house} id={house._id}/>
-                <CardBody>
-                  <div className="m-2 d-flex justify-content-between align-items-center">
+            <div className='col-sm-6 col-lg-4 mb-2' key={house._id}>
+              <Card className='shadow-lg border-0 p-2 mb-2 ronded h-100 d-grid align-self-center' data-aos="flip-down" style={{ ...springs }}>
+                <Carousel house={house} id={house._id} show={true}/>
+                <CardBody className=''>
+                  <div className="m-2 d-flex justify-content-between ">
                     <CardSubtitle
                       className="p-1 text-center w-25"
                       style={house.type === "rent" ? { background: "var(--p)", color: "var(--while)" } : { background: "rgba(255, 152, 0, 0.1)", color: "rgb(255, 152, 0)", fontWeight: 600 }}
@@ -91,7 +94,7 @@ export default function RecentCard({ houses }) {
             {likeCounts[house._id]} {/* Like sonini ko'rsatish */}
                     </div>
                   </div>
-                  <div className="d-flex justify-content-start align-items-center">
+                  <div className="d-flex justify-content-start align-items-stretch">
                     <i className="bi bi-geo-alt-fill text-warning mb-1"></i>
                     <CardLink
                       className="font-weight-light" style={{ color: "var(--p)", marginLeft: "5px" }}
@@ -107,12 +110,20 @@ export default function RecentCard({ houses }) {
                     {house.comment}
                   </CardText>
                   <CardSubtitle className='d-flex align-items-center m-2'>
-                    <Skeleton circle={true} height={40} width={40} className='mx-2' />
+                      {house.author.fileUrl ? (
+                                       <img
+                                         src={house.author.fileUrl}
+                                         className="rounded-circle border border-dark mx-1"
+                                         style={{ height: '50px', width: '50px', objectFit: 'cover' }} 
+                                       />
+                                     ) : (
+                                       <IoPersonSharp className="icon_forPerson rounded-circle border border-dark mx-1"style={{ height: '50px', width: '50px', objectFit: 'cover' }}  />
+                                     )}
                     {house.author.firstName + ' ' + house.author.lastName}
                     <br />
                     {house.author.phone}
                   </CardSubtitle>
-                  <div className="d-flex justify-content-between align-items-center">
+                  <div className="d-flex justify-content-between align-items-stretch">
                     <button className='btn btn-warning'>
                       {house.price}<MdAttachMoney />
                     </button>

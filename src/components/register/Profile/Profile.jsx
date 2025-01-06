@@ -53,28 +53,24 @@
         formData.append('gender', userData.gender);
         formData.append('bio', userData.bio);
 
-        // Rasm tanlanganligini tekshirish
         if (userData.file) {
             formData.append('file', userData.file);
         }
-        // So‘rov yuborish
         const response = await axios.put(`${process.env.REACT_APP_API_URL}/api/profile`, formData, {
           headers: {
-            'x-auth-token': token,  // Fayl bilan yuborilgani uchun Content-Type ni o‘chirib tashlang
+            'x-auth-token': token,
           },
         });
 
-        // Foydalanuvchini yangilash
         const updatedUser = response.data.UploadUser;
         setUserData({
-          // ...prevState,
           ...updatedUser,
         });
           toast.success(response.data.message || 'Upload is successfully');
         setEditing(false)
       } catch (err) {
         console.error('Error uploading file:', err);
-        toast.error(err.message || 'Error uploading file');
+        toast.error(err.response.data.message || 'Error uploading file');
       }
     };
 

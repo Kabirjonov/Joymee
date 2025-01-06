@@ -4,7 +4,7 @@ import { FormGroup, Form, Label, Input, Button } from 'reactstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
-import { validatePhoneNumber } from '../validators'; // Telefon raqamini tekshirish uchun funksiya
+import { validatePhoneNumber } from '../validators'; 
 import Cookies from 'js-cookie';
 
 const SignUp = () => {
@@ -43,7 +43,7 @@ const SignUp = () => {
                 }
             );
             const token = response.headers['x-auth-token'];
-            if (response.status === 200&&token) {
+            if (response.status === 200) {
                 // toast.success('Telefoningizga kod yuborildi.');
                 // setIsOTPStage(true); // OTP bosqichiga o‘tadi
                 Cookies.set('token', token, { expires: 7 });

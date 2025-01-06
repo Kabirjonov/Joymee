@@ -15,7 +15,7 @@ const Agent = ({ agent }) => {
                 className='text-center p-2  border '
             >
                 {fileUrl ? (
-                    <img src={fileUrl} alt="Profile" className="border rounded-circle" style={{ height: '100%', width: '100%', objectFit: 'cover' }} />
+                    <img src={fileUrl} alt="Profile" className="border rounded-circle w-50  m-auto"/>
                 ) : (
                     <IoPersonSharp className="icon_forPerson rounded-circle border border-dark w-50  m-auto" />
                 )}
