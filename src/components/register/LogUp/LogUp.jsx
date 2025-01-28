@@ -26,7 +26,6 @@ const SignUp = () => {
         const { name, value } = e.target;
         setUser((user) => ({ ...user, [name]: value }));
     };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!validatePhoneNumber(user.phone)) {

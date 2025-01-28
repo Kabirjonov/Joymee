@@ -12,7 +12,9 @@ import Carousel from '../home/carousel/carousel'
 const Myhouses = () => {
     const token = Cookies.get('token')
     const [houses, setHouses] = useState([])
+    const [isLoading,setIsLoading]=useState(false)
     const deleteItem = async (id) => {
+        setIsLoading(true)
         try {
             const response = await axios.delete(`${process.env.REACT_APP_API_URL}/api/myhouse`, {
                 data: { id },
@@ -27,6 +29,8 @@ const Myhouses = () => {
         } catch (err) {
             toast.error(err.response?.data?.message || "Failed to delete item");
             console.error(err);
+        }finally{
+            setIsLoading(false)
         }
     };
     useEffect(() => {
@@ -56,7 +60,7 @@ const Myhouses = () => {
                     <div className="list-group list-group-flush">
                         {houses.map((house) => (
                             <div className='list-group-item  my-3 position-relative' key={house._id}>
-                                <MdDelete onClick={() => deleteItem(house._id)} className='position-absolute deleteItem' />
+                                <MdDelete onClick={() => deleteItem(house._id)} disabled={isLoading} className='position-absolute deleteItem' />
                                 <div className='mb-3 row' key={house._id}>
                                     <div className='d-flex center align-items-center  col-lg-6 col-sm-12 '>
                                          {house.fileUrls && house.fileUrls.length > 0 ? (

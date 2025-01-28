@@ -5,7 +5,6 @@
   import './style.css';
   import { useLanguage } from '../../changeLanguage/changer';
   import Skeleton from 'react-loading-skeleton';
-  import {CardImg}from 'reactstrap'
 
   const Carousel = ({ house, id ,show}) => {
     const [checked, setChecked] = useState(false);
@@ -39,35 +38,31 @@
       return <div className='mt-5'><Skeleton height={100} /></div>;
     }
 
-    // Map fileNames array to create carousel items
     const carouselItems = house.fileUrls.map((fileUrl, index) => ({
-      src: fileUrl, // Assuming fileName is a full URL
+      src: fileUrl, 
       altText: `Slide ${index + 1}`,
       key: index + 1
     }));
 
     return (
-      <div className=''>
-        {carouselItems.length > 0 ? (
-          <UncontrolledCarousel
-            items={carouselItems}
-            className='position-relative 
-            caruselImages
-            '
-
-          />
-        ) : (
-          <div>No images available</div>
-        )}
-        {show&&(
+      <div>
+      {carouselItems.length > 0 ? (
+        <UncontrolledCarousel
+          items={carouselItems}
+          className='position-relative caruselImages'
+        />
+      ) : (
+        <div>No images available</div>
+      )}
+      {show && (
         <div className="CardSaveStyle" onClick={() => setChecked(!checked)}>
-        {checked 
-          ? <BsBookmarkFill className='text-light w-100 h-100' /> 
-          : <BsBookmark className='text-light w-100 h-100' />}
-      </div>
-        )}
-
-      </div>
+          {checked 
+            ? <BsBookmarkFill className='text-light w-100 h-100' /> 
+            : <BsBookmark className='text-light w-100 h-100' />}
+        </div>
+      )}
+    </div>
+    
     );
   };
 
