@@ -5,13 +5,10 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import './header.css';
 import logo from '../../images/logo.png';
 import Cookies from 'js-cookie';
-import img from '../../images/room.jpg';
 import axios from 'axios';
 import { toast } from "react-toastify";
-import { IoPersonSharp } from "react-icons/io5";
 import Swal from "sweetalert2";
 import {useLanguage}from '../../changeLanguage/changer'
-import { FaShoppingCart } from "react-icons/fa";
 
 export default function Header() {
   const token = Cookies.get('token');
@@ -76,11 +73,8 @@ export default function Header() {
       );
       if (err.response.status === 422) {
         toast.error(`Account o\`chirishdan oldin e\`lonlarni ochiring`,);
-
       }
-
     }
-
     } else {
     Swal.fire("Bekor qilindi", "Hisobingiz saqlab qolindi.", "info");
     }
@@ -146,14 +140,9 @@ export default function Header() {
             
                 </Dropdown.Menu>
               </Dropdown>
-              {/* bu yerda til tanlash functionalnisi ishladi lekin mening xammasini 3 tilga ogishga xoxishim bolmadi */}
               {token ? (
                 <div className="d-flex align-items-center">
-                  {ImageUrl.length==0 ? (
-                    <IoPersonSharp className="rounded-circle border border-dark" style={{ height: '50px', width: '50px', objectFit: 'cover' }} />
-                  ) : (
                     <img src={ImageUrl} className="border rounded-circle" style={{ height: '50px', width: '50px', objectFit: 'cover' }} />
-                  )}
                   <Dropdown className="navbar__profile-dropdown">
                     <Dropdown.Toggle variant="link" id="profile-dropdown" aria-label="Profile">
                       Setting

@@ -8,7 +8,6 @@ import { useSpring, animated } from "@react-spring/web";
 import Skeleton from "react-loading-skeleton";
 import Carousel from "../carousel/carousel";
 import { FaHeart } from "react-icons/fa6";
-import { IoPersonSharp } from "react-icons/io5";
 import { BiSolidShow } from "react-icons/bi";
 
 export default function RecentCard({ houses }) {
@@ -146,7 +145,6 @@ export default function RecentCard({ houses }) {
                   </div>
                   <CardText>{house.comment}</CardText>
                   <CardSubtitle className="d-flex align-items-center m-2">
-                    {house.author.fileUrl ? (
                       <img
                         src={house.author.fileUrl}
                         className="rounded-circle border border-dark mx-1"
@@ -156,16 +154,6 @@ export default function RecentCard({ houses }) {
                           objectFit: "cover"
                         }}
                       />
-                    ) : (
-                      <IoPersonSharp
-                        className="icon_forPerson rounded-circle border border-dark mx-1"
-                        style={{
-                          height: "50px",
-                          width: "50px",
-                          objectFit: "cover"
-                        }}
-                      />
-                    )}
                     {house.author.firstName + " " + house.author.lastName}
                     <br />
                     {house.author.phone}

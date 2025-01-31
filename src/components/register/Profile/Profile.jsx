@@ -107,21 +107,12 @@
                      <Skeleton circle={true} height='100%' width="100%" />
                     </>
                   ):(
-                    <>
-                           {userData.fileUrl ? (
                     <img
                       src={userData.fileUrl}
                       // alt="Profile"
                       className="rounded-circle border border-dark w-100 h-100"
                     />
-                  ) : (
-                    <IoPersonSharp className="icon_forPerson rounded-circle border border-dark w-100 h-100" />
                   )}
-                    </>
-                  )}
-           
-                
-
                   {editing && (
                     <>
                       <label htmlFor="profileImageUpload" className="add_Person_Image">

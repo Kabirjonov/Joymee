@@ -11,10 +11,8 @@ export default function Hero() {
     <>
       <section className='hero' style={{height:'100vh'}}>
         <div className='container'>
-          <Heading title="search your next home" subtitle="Lorem ipsum dolor sit amet laudantium optio quae repudiandae accusamus. Hic?"/> 
-{/*          bu sinov uchun home hero ichida yozilgan tili ozgarishi edi functionalnis ishladi lekin butun saxifani uch tilga ogirib chiqishga erindim
-           <Heading title={tranlation[language].welcome} subtitle={tranlation[language].contact}/>  */}
-          <h1></h1>
+          {/* <Heading title="search your next home" subtitle="Lorem ipsum dolor sit amet laudantium optio quae repudiandae accusamus. Hic?"/>  */}
+           <Heading title={tranlation[language].welcome} subtitle={tranlation[language].contact}/> 
           <div className="" onClick={()=>navigate('/blog')}>
           <Search/>
           </div>
