@@ -1,15 +1,15 @@
 const translations = {
     uz:{
-        welcome:'Asalom alekum',
+        welcome:'Assalomu Aleykum ',
         contact:'Uy sotishg va sotib olish uchun elonlaringizni joylashingiz uchun qulay website'
     },
     ru:{
-        welcome:'найди свой следующий дом',
-        contact:'Удобный сайт для размещения объявлений о покупке и продаже домов.'
+        welcome:'',
+        contact:'найди свой следующий дом,Удобный сайт для размещения объявлений о покупке и продаже домов.'
     },
     eng:{
-        welcome:'search your next home',
-        contact:'A convenient website for you to post ads for buying and selling houses'
+        welcome:'',
+        contact:'search your next home, A convenient website for you to post ads for buying and selling houses'
 
     }
 } 

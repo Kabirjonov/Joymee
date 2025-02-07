@@ -11,7 +11,6 @@ export default function Hero() {
     <>
       <section className='hero' style={{height:'100vh'}}>
         <div className='container'>
-          {/* <Heading title="search your next home" subtitle="Lorem ipsum dolor sit amet laudantium optio quae repudiandae accusamus. Hic?"/>  */}
            <Heading title={tranlation[language].welcome} subtitle={tranlation[language].contact}/> 
           <div className="" onClick={()=>navigate('/blog')}>
           <Search/>
