@@ -1,0 +1,11 @@
+.awards__icon  {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 4% 50%;
+    font-size: 40px;
+    color: var(--while);
+    background: rgba(255, 255, 255, 0.1);
+}
